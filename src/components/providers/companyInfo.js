@@ -23,6 +23,8 @@ export const decrypt = (data) => {
 		return CryptoJS.AES.decrypt(data, encryptKey).toString(CryptoJS.enc.Utf8);
 	} catch (error) {
 		console.error("Error decrypting data:", error);
+		clearLocalStorage();
+		window.location.reload();
 		return null;
 	}
 };
