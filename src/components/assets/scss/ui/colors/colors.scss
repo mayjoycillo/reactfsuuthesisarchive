@@ -1,158 +1,158 @@
-.primary-color {
-    color: $primary;
+.text-primary {
+	color: $primary;
 }
-.primary-bg-color {
-    background-color: $primary;
+.bg-primary {
+	background-color: $primary;
 }
-.primary-color-active {
-    color: $primaryActive;
+.text-primary-active {
+	color: $primaryActive;
 }
-.primary-bg-color-active {
-    background-color: $primaryActive;
+.bg-primary-active {
+	background-color: $primaryActive;
 }
-.second-color {
-    color: $secondary;
+.text-secondary {
+	color: $secondary;
 }
-.second-bg-color {
-    background-color: $secondary;
+.bg-secondary {
+	background-color: $secondary;
 }
-.second-color-active {
-    color: $secondaryActive;
+.text-secondary-active {
+	color: $secondaryActive;
 }
-.second-bg-color-active {
-    background-color: $secondaryActive;
-}
-
-.success-color {
-    color: $success;
-}
-.success-bg-color {
-    background-color: $success;
-}
-.success-color-active {
-    color: $successActive;
-}
-.success-bg-color-active {
-    background-color: $successActive;
-}
-.warning-color {
-    color: $warning;
-}
-.warning-bg-color {
-    background-color: $warning;
-}
-.warning-color-active {
-    color: $warningActive;
-}
-.warning-bg-color-active {
-    background-color: $warningActive;
-}
-.danger-color {
-    color: $danger;
-}
-.danger-bg-color {
-    background-color: $danger;
-}
-.danger-color-active {
-    color: $dangerActive;
-}
-.danger-bg-color-active {
-    background-color: $dangerActive;
-}
-.info-color {
-    color: $info;
-}
-.info-bg-color {
-    background-color: $info;
-}
-.info-color-active {
-    color: $infoActive;
-}
-.info-bg-color-active {
-    background-color: $infoActive;
-}
-.indigo-color {
-    color: $indigo;
-}
-.indigo-bg-color {
-    background-color: $indigo;
-}
-.indigo-color-active {
-    color: $indigoActive;
-}
-.indigo-bg-color-active {
-    background-color: $indigoActive;
-}
-.purple-color {
-    color: $purple;
-}
-.purple-bg-color {
-    background-color: $purple;
-}
-.purple-color-active {
-    color: $purpleActive;
-}
-.purple-bg-color-active {
-    background-color: $purpleActive;
-}
-.pink-color {
-    color: $pink;
-}
-.pink-bg-color {
-    background-color: $pink;
-}
-.pink-color-active {
-    color: $pinkActive;
-}
-.pink-bg-color-active {
-    background-color: $pinkActive;
-}
-.teal-color {
-    color: $teal;
-}
-.teal-bg-color {
-    background-color: $teal;
-}
-.teal-color-active {
-    color: $tealActive;
-}
-.teal-bg-color-active {
-    background-color: $tealActive;
-}
-.dark-color {
-    color: $dark;
-}
-.dark-bg-color {
-    background-color: $dark;
-}
-.dark-color-active {
-    color: $darkActive;
-}
-.dark-bg-color-active {
-    background-color: $darkActive;
-}
-.orange-color {
-    color: $orange;
-}
-.orange-bg-color {
-    background-color: $orange;
-}
-.orange-color-active {
-    color: $orangeActive;
-}
-.orange-bg-color-active {
-    background-color: $orangeActive;
+.bg-secondary-active {
+	background-color: $secondaryActive;
 }
 
-.main-primary-color {
-    color: $mainPrimary;
+.text-success {
+	color: $success;
 }
-.main-primary-bg-color {
-    background-color: $mainPrimary;
+.bg-success {
+	background-color: $success;
 }
-.main-second-color {
-    color: $mainSecondary;
+.text-success-active {
+	color: $successActive;
 }
-.main-second-bg-color {
-    background-color: $mainSecondary;
+.bg-success-active {
+	background-color: $successActive;
+}
+.text-warning {
+	color: $warning;
+}
+.bg-warning {
+	background-color: $warning;
+}
+.text-warning-active {
+	color: $warningActive;
+}
+.bg-warning-active {
+	background-color: $warningActive;
+}
+.text-danger {
+	color: $danger;
+}
+.bg-danger {
+	background-color: $danger;
+}
+.text-danger-active {
+	color: $dangerActive;
+}
+.bg-danger-active {
+	background-color: $dangerActive;
+}
+.text-info {
+	color: $info;
+}
+.bg-info {
+	background-color: $info;
+}
+.text-info-active {
+	color: $infoActive;
+}
+.bg-info-active {
+	background-color: $infoActive;
+}
+.text-indigo {
+	color: $indigo;
+}
+.bg-indigo {
+	background-color: $indigo;
+}
+.text-indigo-active {
+	color: $indigoActive;
+}
+.bg-indigo-active {
+	background-color: $indigoActive;
+}
+.text-purple {
+	color: $purple;
+}
+.bg-purple {
+	background-color: $purple;
+}
+.text-purple-active {
+	color: $purpleActive;
+}
+.bg-purple-active {
+	background-color: $purpleActive;
+}
+.text-pink {
+	color: $pink;
+}
+.bg-pink {
+	background-color: $pink;
+}
+.text-pink-active {
+	color: $pinkActive;
+}
+.bg-pink-active {
+	background-color: $pinkActive;
+}
+.text-teal {
+	color: $teal;
+}
+.bg-teal {
+	background-color: $teal;
+}
+.text-teal-active {
+	color: $tealActive;
+}
+.bg-teal-active {
+	background-color: $tealActive;
+}
+.text-dark {
+	color: $dark;
+}
+.bg-dark {
+	background-color: $dark;
+}
+.text-dark-active {
+	color: $darkActive;
+}
+.bg-dark-active {
+	background-color: $darkActive;
+}
+.text-orange {
+	color: $orange;
+}
+.bg-orange {
+	background-color: $orange;
+}
+.text-orange-active {
+	color: $orangeActive;
+}
+.bg-orange-active {
+	background-color: $orangeActive;
+}
+
+.main-text-primary {
+	color: $mainPrimary;
+}
+.main-bg-primary {
+	background-color: $mainPrimary;
+}
+.main-text-secondary {
+	color: $mainSecondary;
+}
+.main-bg-secondary {
+	background-color: $mainSecondary;
 }
