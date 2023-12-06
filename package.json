@@ -1,0 +1,78 @@
+{
+	"name": "fsuu_dsac_template",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@ant-design/compatible": "^5.1.2",
+		"@ant-design/icons": "^5.2.6",
+		"@ant-design/pro-layout": "^7.17.15",
+		"@fortawesome/fontawesome-pro": "^6.4.2",
+		"@fortawesome/fontawesome-svg-core": "^6.4.2",
+		"@fortawesome/free-brands-svg-icons": "^6.4.2",
+		"@fortawesome/pro-duotone-svg-icons": "^6.4.2",
+		"@fortawesome/pro-light-svg-icons": "^6.4.2",
+		"@fortawesome/pro-regular-svg-icons": "^6.4.2",
+		"@fortawesome/pro-solid-svg-icons": "^6.4.2",
+		"@fortawesome/react-fontawesome": "^0.2.0",
+		"@fullcalendar/core": "^6.1.9",
+		"@fullcalendar/daygrid": "^6.1.9",
+		"@fullcalendar/interaction": "^6.1.9",
+		"@fullcalendar/react": "^6.1.9",
+		"@fullcalendar/timegrid": "^6.1.9",
+		"@testing-library/jest-dom": "^5.17.0",
+		"@testing-library/react": "^13.4.0",
+		"@testing-library/user-event": "^13.5.0",
+		"antd": "^5.11.1",
+		"antd-img-crop": "^4.17.0",
+		"antd-password-input-strength": "^2.0.1",
+		"axios": "^1.6.2",
+		"crypto-js": "^4.2.0",
+		"dayjs": "^1.11.10",
+		"highcharts": "^11.2.0",
+		"quill-image-resize-module-react": "^3.0.0",
+		"quill-paste-smart": "^1.4.12",
+		"react": "^18.2.0",
+		"react-clear-cache": "^1.4.14",
+		"react-code-blocks": "^0.1.5",
+		"react-dom": "^18.2.0",
+		"react-draggable": "^4.4.6",
+		"react-input-mask": "^2.0.4",
+		"react-query": "^3.39.3",
+		"react-quill": "^2.0.0",
+		"react-router-dom": "^6.18.0",
+		"react-scripts": "5.0.1",
+		"react-webcam": "^7.2.0",
+		"sass": "^1.69.5",
+		"spinners-react": "^1.0.7",
+		"web-vitals": "^2.1.4"
+	},
+	"scripts": {
+		"start": "set PORT=4006 && react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"prebuild": "npm run generate-build-meta",
+		"generate-build-meta": "node ./node_modules/react-clear-cache/bin/cli.js"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+	}
+}

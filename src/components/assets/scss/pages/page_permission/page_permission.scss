@@ -1,0 +1,45 @@
+#PagePermission {
+	.module-button-wrapper {
+		.ant-space-item {
+			padding: 5px 10px;
+			border: 1px solid #e8e8e8;
+
+			&:nth-child(2),
+			&:nth-child(3) {
+				border-left: 0px;
+			}
+		}
+	}
+
+	.form-item-module-button-wrapper {
+		.ant-space-item {
+			width: 100%;
+		}
+	}
+}
+
+.modal-form-module {
+	.ant-modal {
+		.ant-modal-content {
+			.ant-modal-body {
+				.form-item-module-button-wrapper {
+					.ant-space-item {
+						&:first-child {
+							width: calc(100% - 20px);
+						}
+						&:last-child {
+							width: 20px;
+						}
+
+						.form-list-btn-delete-wrapper {
+							height: 47px;
+							display: flex;
+							align-items: center;
+							justify-content: flex-end;
+						}
+					}
+				}
+			}
+		}
+	}
+}
