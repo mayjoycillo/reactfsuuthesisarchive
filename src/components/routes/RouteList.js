@@ -1,5 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import { faHome, faUsers } from "@fortawesome/pro-regular-svg-icons";
+import {
+	faBook,
+	faHome,
+	faUser,
+	faUsers,
+} from "@fortawesome/pro-regular-svg-icons";
 
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
@@ -10,6 +15,11 @@ import PageLogin from "../views/public/PageLogin/PageLogin";
 
 import PageDashboard from "../views/private/PageDashboard/PageDashboard";
 import PageEditProfile from "../views/private/PageEditProfile/PageEditProfile";
+import PageProfiling from "../views/private/PageProfiling/PageProfiling";
+import PageProfilingAdd from "../views/private/PageProfiling/PageProfilingAdd";
+import PageThesis from "../views/private/PageThesis/PageThesis";
+import PageThesisAdd from "../views/private/PageThesis/PageThesisAdd";
+import PageThesisEdit from "../views/private/PageThesis/PageThesisEdit";
 
 export default function RouteList() {
 	return (
@@ -60,6 +70,219 @@ export default function RouteList() {
 							},
 						]}
 						component={PageDashboard}
+					/>
+				}
+			/>
+
+			<Route
+				path="/thesis/books"
+				element={
+					<PrivateRoute
+						moduleCode="M-01"
+						moduleName="Thesis"
+						title="Thesis"
+						subtitle="ADMIN"
+						pageId="PageThesis"
+						pageHeaderIcon={faUsers}
+						breadcrumb={[
+							{
+								name: "Dashboard",
+								link: "/dashboard",
+							},
+
+							{
+								name: "Books",
+							},
+						]}
+						component={PageThesis}
+					/>
+				}
+			/>
+
+			<Route
+				path="/thesis/books/add"
+				element={
+					<PrivateRoute
+						moduleCode="M-01"
+						moduleName="Thesis"
+						title="Thesis"
+						subtitle="ADMIN"
+						pageId="PageThesis"
+						pageHeaderIcon={faBook}
+						breadcrumb={[
+							{
+								name: "Dashboard",
+								link: "/dashboard",
+							},
+							{
+								name: "Thesis",
+								link: "/thesis/books",
+							},
+							{
+								name: "Add",
+							},
+						]}
+						component={PageThesisAdd}
+					/>
+				}
+			/>
+
+			<Route
+				path="/thesis/books/edit/:id"
+				element={
+					<PrivateRoute
+						moduleCode="M-01"
+						moduleName="Thesis"
+						title="Thesis"
+						subtitle="ADMIN"
+						pageId="PageThesis"
+						pageHeaderIcon={faBook}
+						breadcrumb={[
+							{
+								name: "Dashboard",
+								link: "/dashboard",
+							},
+							{
+								name: "Thesis",
+								link: "/thesis",
+							},
+							{
+								name: "Edit",
+							},
+						]}
+						component={PageThesisEdit}
+					/>
+				}
+			/>
+
+			<Route
+				path="/thesis/archived"
+				element={
+					<PrivateRoute
+						moduleCode="M-01"
+						moduleName="Thesis"
+						title="Thesis"
+						subtitle="ADMIN"
+						pageId="PageThesis"
+						pageHeaderIcon={faBook}
+						breadcrumb={[
+							{
+								name: "Dashboard",
+								link: "/dashboard",
+							},
+							{
+								name: "Books",
+								link: "/thesis/books",
+							},
+							{
+								name: "Archived",
+							},
+						]}
+						component={PageThesis}
+					/>
+				}
+			/>
+
+			<Route
+				path="/users/current"
+				element={
+					<PrivateRoute
+						moduleCode="M-01"
+						moduleName="Profiling"
+						title="Profiling"
+						subtitle="ADMIN"
+						pageId="PageProfiling"
+						pageHeaderIcon={faUsers}
+						breadcrumb={[
+							{
+								name: "Dashboard",
+								link: "/dashboard",
+							},
+							{
+								name: "Books",
+								link: "/thesis/books",
+							},
+							{
+								name: "Archived",
+								link: "/thesis/archived",
+							},
+							{
+								name: "Users",
+							},
+						]}
+						component={PageProfiling}
+					/>
+				}
+			/>
+
+			<Route
+				path="/users/current/add"
+				element={
+					<PrivateRoute
+						moduleCode="M-01"
+						moduleName="Users"
+						title="Users"
+						subtitle="ADMIN"
+						pageId="PageProfiling"
+						pageHeaderIcon={faUsers}
+						breadcrumb={[
+							{
+								name: "Dashboard",
+								link: "/dashboard",
+							},
+							{
+								name: "Books",
+								link: "/thesis/books",
+							},
+							{
+								name: "Archived",
+								link: "/thesis/archived",
+							},
+							{
+								name: "Current",
+								link: "/users/current",
+							},
+							{
+								name: "Add",
+							},
+						]}
+						component={PageProfilingAdd}
+					/>
+				}
+			/>
+
+			<Route
+				path="/users/archived"
+				element={
+					<PrivateRoute
+						moduleCode="M-01"
+						moduleName="Users"
+						title="Users"
+						subtitle="ADMIN"
+						pageId="PageProfiling"
+						pageHeaderIcon={faUsers}
+						breadcrumb={[
+							{
+								name: "Dashboard",
+								link: "/dashboard",
+							},
+							{
+								name: "Books",
+								link: "/thesis/books",
+							},
+							{
+								name: "Archived",
+								link: "/thesis/archived",
+							},
+							{
+								name: "Current",
+								link: "/users/current",
+							},
+							{
+								name: "Archived",
+							},
+						]}
+						component={PageProfiling}
 					/>
 				}
 			/>

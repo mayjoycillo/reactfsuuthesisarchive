@@ -76,7 +76,7 @@ export default function PageLogin() {
 						<img src="../../../images/register.png" alt="" />
 					</div>
 					<Typography.Title className="text-center text-1 mt-0">
-						Applicant Access Module
+						123
 					</Typography.Title>
 
 					<Typography.Title className="text-center text-log-in mt-0">

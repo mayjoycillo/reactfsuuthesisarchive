@@ -1,6 +1,7 @@
 import { Menu } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome } from "@fortawesome/pro-light-svg-icons";
+import { faHome, faUser } from "@fortawesome/pro-light-svg-icons";
+import { faBook } from "@fortawesome/pro-regular-svg-icons";
 
 export const adminHeaderMenuLeft = (
 	<>
@@ -33,5 +34,41 @@ export const adminSideMenu = [
 		path: "/dashboard",
 		icon: <FontAwesomeIcon icon={faHome} />,
 		moduleCode: "M-01",
+	},
+
+	{
+		title: "Thesis",
+		path: "/thesis",
+		icon: <FontAwesomeIcon icon={faBook} />,
+		children: [
+			{
+				title: "Books",
+				path: "/thesis/books",
+				moduleCode: "M-01",
+			},
+			{
+				title: "Archived",
+				path: "/thesis/archived",
+				moduleCode: "M-01",
+			},
+		],
+	},
+
+	{
+		title: "Users",
+		path: "/users",
+		icon: <FontAwesomeIcon icon={faUser} />,
+		children: [
+			{
+				title: "Current",
+				path: "/users/current",
+				moduleCode: "M-01",
+			},
+			{
+				title: "Archived",
+				path: "/users/archived",
+				moduleCode: "M-01",
+			},
+		],
 	},
 ];

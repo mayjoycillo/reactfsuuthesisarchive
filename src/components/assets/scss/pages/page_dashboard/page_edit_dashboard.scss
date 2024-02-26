@@ -1,0 +1,26 @@
+#PageDashboard {
+	.ant-layout {
+		.ant-layout-content {
+			.ant-card {
+				.ant-card-body {
+					.ant-row {
+						.ant-col {
+							.float-wrapper {
+								margin-bottom: 10px;
+							}
+							.ant-select {
+								margin-bottom: 10px;
+							}
+							.ant-radio-group {
+								margin-bottom: 10px;
+							}
+							.ant-btn {
+								text-align: right;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
