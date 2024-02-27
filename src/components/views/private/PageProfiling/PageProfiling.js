@@ -49,7 +49,7 @@ export default function PageProfiling() {
 			{location.pathname === "/users/current" ? (
 				<Col xs={24} sm={24} md={24}>
 					<Button
-						clasName="btn-main-primary btn-main-invert-outline b-r-none"
+						className="btn-main-primary btn-main-invert-outline b-r-none"
 						icon={<FontAwesomeIcon icon={faPlus} />}
 						onClick={() => navigate(`${location.pathname}/add`)}
 						size="large"

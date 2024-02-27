@@ -92,6 +92,7 @@ export default function PageThesisAdd() {
 			<Col xs={24} sm={24} md={24} lg={24}>
 				<ThesisFormAuthor />
 			</Col>
+
 			<Form onFinish={onFinish} form={form}>
 				<Row gutter={(12, 12)}>
 					<Col xs={24} sm={24} md={24} lg={6}>
@@ -102,6 +103,35 @@ export default function PageThesisAdd() {
 								onChange={onChange}
 								format="YYYY-MM"
 								picker="month"
+							/>
+						</Form.Item>
+					</Col>
+					<Col xs={24} sm={24} md={24} lg={6}>
+						<Form.Item name="type">
+							<FloatInput
+								label="Type of Text"
+								placeholder="Type of Text"
+								onChange={onChange}
+							/>
+						</Form.Item>
+					</Col>
+					<Col xs={24} sm={24} md={24} lg={6}>
+						<Form.Item name="university">
+							<FloatInput
+								label="University"
+								placeholder="University"
+								onChange={onChange}
+							/>
+						</Form.Item>
+					</Col>
+				</Row>
+				<Row gutter={(12, 12)}>
+					<Col xs={24} sm={24} md={24} lg={6}>
+						<Form.Item name="attachment_id">
+							<FloatInput
+								label="Attachment"
+								placeholder="Attachment"
+								onChange={onChange}
 							/>
 						</Form.Item>
 					</Col>
