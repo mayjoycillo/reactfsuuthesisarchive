@@ -1,5 +1,5 @@
 .private-layout {
-	background: $layoutBackground;
+	background: #16349e;
 	position: relative;
 	overflow: hidden;
 	min-height: 100vh;
@@ -11,17 +11,17 @@
 
 		transition: all 0.25s, background 0s;
 
-		@include atsm {
-			margin-left: 0px;
-		}
+		// @include atsm {
+		// 	margin-left: 0px;
+		// }
 
 		&.ant-layout-has-collapse {
 			margin-left: 55px;
 			max-width: 100%;
 
-			@include atsm {
-				margin-left: 0px;
-			}
+			// @include atsm {
+			// 	margin-left: 0px;
+			// }
 		}
 
 		&:not(&.ant-layout-has-collapse) {

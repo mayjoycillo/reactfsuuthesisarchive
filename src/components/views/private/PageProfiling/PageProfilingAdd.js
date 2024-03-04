@@ -1,5 +1,14 @@
 import { useParams } from "react-router-dom";
-import { Card, Col, Row, Button, Form, Typography, notification } from "antd";
+import {
+	Card,
+	Col,
+	Row,
+	Button,
+	Form,
+	Typography,
+	notification,
+	Avatar,
+} from "antd";
 import React, { Component, useState } from "react";
 
 import FloatInput from "../../../providers/FloatInput";
@@ -14,11 +23,13 @@ import optionLanguage from "../../../providers/optionLanguage";
 import nationalities from "../../../providers/nationalities";
 
 import { DELETE, GET, POST } from "../../../providers/useAxiosQuery";
+import { UserOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
 export default function PageProfiling() {
 	const params = useParams();
+	const [src] = useState("");
 
 	const onChange = (date, dateString) => {
 		console.log(date, dateString);
@@ -54,19 +65,8 @@ export default function PageProfiling() {
 			data.append("password", values.password);
 		}
 
-		data.append("firstname", values.firstname);
-		data.append("middlename", values.middlename);
-		data.append("lastname", values.lastname);
-		data.append("extensionname", values.extensionname);
-		data.append("placeofbirth", values.placeofbirth);
-		data.append("dateofbirth", values.dateofbirth);
-		data.append("gender", values.gender);
-		data.append("address", values.address);
-		data.append("religion", values.religion);
-		if (values.national_id) {
-			data.append("nationality", values.nationality);
-		}
-		data.append("contact", values.contact);
+		data.append("fullname", values.fullname);
+		data.append("school_id", values.school_id);
 
 		mutateProfileCreate(data, {
 			onSuccess: (res) => {
@@ -86,58 +86,97 @@ export default function PageProfiling() {
 	return (
 		<>
 			<Form form={form} onFinish={onFinish}>
-				<Title level={5}>Users Account</Title>
-				<Row gutter={(12, 12)}>
-					<Col xs={24} sm={24} md={25} lg={12}>
-						<Form.Item name="fullname">
-							<FloatInput
-								label="Fullname"
-								placeholder="Fullname"
-								onChange={onChange}
-							/>
-						</Form.Item>
+				<Row gutter={[12, 12]}>
+					<Col xs={24} sm={24} md={24} lg={24}>
+						<div
+							style={{
+								background: "gray",
+								padding: "5px 10px",
+								borderTopLeftRadius: "20px",
+								borderTopRightRadius: "20px",
+							}}
+						>
+							<Title level={5}>Users Information</Title>
+						</div>
+						<Card>
+							<Row gutter={[12, 12]}>
+								<Col xs={24} sm={12} md={12} lg={12}>
+									<label
+										htmlFor="photo-upload"
+										className="custom-file-upload fas"
+									>
+										<div className="img-wrap img-upload">
+											<Avatar
+												shape="square"
+												size={120}
+												icon={<UserOutlined />}
+											/>
+										</div>
+										<input id="photo-upload" type="file" onChange={onChange} />
+									</label>
+								</Col>
+								<Col xs={24} sm={12} md={12} lg={12}>
+									<Form.Item name="username">
+										<FloatInput
+											label="Username"
+											placeholder="Username"
+											onChange={onChange}
+										/>
+									</Form.Item>
+
+									<Form.Item name="password">
+										<FloatInput
+											label="Password"
+											placeholder="Password"
+											onChange={onChange}
+										/>
+									</Form.Item>
+								</Col>
+							</Row>
+						</Card>
 					</Col>
 				</Row>
-				<Row gutter={(12, 12)}>
-					<Col xs={24} sm={24} md={25} lg={12}>
-						<Form.Item name="schoolid">
-							<FloatInput
-								label="School ID"
-								placeholder="School ID"
-								onChange={onChange}
-							/>
-						</Form.Item>
-					</Col>
-				</Row>
-				<Row gutter={(12, 12)}>
-					<Col xs={24} sm={24} md={25} lg={12}>
-						<Form.Item name="username">
-							<FloatInput
-								label="Username"
-								placeholder="Username"
-								onChange={onChange}
-							/>
-						</Form.Item>
-					</Col>
-				</Row>
-				<Row gutter={(12, 12)}>
-					<Col xs={24} sm={24} md={25} lg={12}>
-						<Form.Item name="email" rules={[validateRules.email]}>
-							<FloatInput label="Email Address" placeholder="Email Address" />
-						</Form.Item>
-					</Col>
-				</Row>
-				<Row gutter={(12, 12)}>
-					<Col xs={24} sm={24} md={25} lg={12}>
-						<Form.Item name="password">
-							<FloatInput
-								label="Password"
-								placeholder="Password"
-								onChange={onChange}
-							/>
-						</Form.Item>
-					</Col>
-				</Row>
+				<div
+					style={{
+						background: "gray",
+						padding: "3px 8px",
+						borderTopLeftRadius: "20px",
+						borderTopRightRadius: "20px",
+					}}
+				>
+					<Title level={5}>Users Information</Title>
+				</div>
+				<Card>
+					<Row gutter={[12, 12]}>
+						<Col xs={24} sm={24} md={8} lg={8}>
+							<Form.Item name="fullname" style={{ marginBottom: 0 }}>
+								<FloatInput
+									label="Fullname"
+									placeholder="Fullname"
+									onChange={onChange}
+								/>
+							</Form.Item>
+						</Col>
+						<Col xs={24} sm={24} md={8} lg={8}>
+							<Form.Item name="schoolid" style={{ marginBottom: 0 }}>
+								<FloatInput
+									label="School ID"
+									placeholder="School ID"
+									onChange={onChange}
+								/>
+							</Form.Item>
+						</Col>
+						<Col xs={24} sm={24} md={8} lg={8}>
+							<Form.Item
+								name="email"
+								rules={[validateRules.email]}
+								style={{ marginBottom: 0 }}
+							>
+								<FloatInput label="Email Address" placeholder="Email Address" />
+							</Form.Item>
+						</Col>
+					</Row>
+				</Card>
 			</Form>
 		</>
 	);

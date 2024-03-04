@@ -8,6 +8,7 @@ import FloatDatePicker from "../../../providers/FloatDatePicker";
 import FloatSelect from "../../../providers/FloatSelect";
 import { GET, POST } from "../../../providers/useAxiosQuery";
 import notificationErrors from "../../../providers/notificationErrors";
+import optionType from "../../../providers/optionType";
 
 export default function PageThesisAdd() {
 	const location = useLocation();
@@ -36,6 +37,9 @@ export default function PageThesisAdd() {
 		data.append("department_id", values.department_id);
 		data.append("bookname", values.bookname);
 		data.append("datepublish", values.datepublish);
+		data.append("type", values.type);
+		data.append("university", values.university);
+		data.append("attachment_id", values.attachment_id);
 
 		// Notification
 		mutatethesis(data, {
@@ -56,7 +60,16 @@ export default function PageThesisAdd() {
 	return (
 		<>
 			<Form onFinish={onFinish} form={form}>
-				<Typography.Title level={5}>Thesis Book Information</Typography.Title>
+				<div
+					style={{
+						background: "#e6f7ff",
+						padding: "5px 10px",
+						borderTopLeftRadius: "20px",
+						borderTopRightRadius: "20px",
+					}}
+				>
+					<Typography.Title level={5}>Thesis Book Information</Typography.Title>
+				</div>
 
 				<Row gutter={(12, 12)}>
 					<Col xs={24} sm={24} md={24} lg={12}>
@@ -108,14 +121,14 @@ export default function PageThesisAdd() {
 					</Col>
 					<Col xs={24} sm={24} md={24} lg={6}>
 						<Form.Item name="type">
-							<FloatInput
+							<FloatSelect
 								label="Type of Text"
 								placeholder="Type of Text"
-								onChange={onChange}
+								options={optionType}
 							/>
 						</Form.Item>
 					</Col>
-					<Col xs={24} sm={24} md={24} lg={6}>
+					<Col xs={24} sm={24} md={24} lg={12}>
 						<Form.Item name="university">
 							<FloatInput
 								label="University"

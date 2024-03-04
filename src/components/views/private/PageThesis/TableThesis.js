@@ -141,6 +141,7 @@ export default function TableThesis(props) {
 							key="datepublish"
 							dataIndex="datepublish"
 						/>
+						<Table.Column title="Type of Text" key="type" dataIndex="type" />
 					</Table>
 				</Col>
 
