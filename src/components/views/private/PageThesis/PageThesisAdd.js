@@ -1,6 +1,7 @@
-import { useLocation, useParams } from "react-router-dom";
 import React from "react";
+import { useLocation, useParams } from "react-router-dom";
 import { Button, Col, Form, Row, Typography, notification } from "antd";
+
 import FloatInput from "../../../providers/FloatInput";
 import validateRules from "../../../providers/validateRules";
 import ThesisFormAuthor from "./PageThesisFormComponents/ThesisFormAuthor";

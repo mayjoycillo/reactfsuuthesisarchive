@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { GET } from "./useAxiosQuery";
 import { userData } from "./companyInfo";
 
-export default function CheckUserPermission(moduleCode, moduleName, location) {
+export default function useCheckUserPermission(
+	moduleCode,
+	moduleName,
+	location
+) {
 	const { data: dataPermissions, refetch: refetchPermission } = GET(
 		`api/user_permission/${userData().id}`,
 		["check_user_permission"],

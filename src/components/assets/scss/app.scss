@@ -1,42 +1,42 @@
 // Variables
-@import "variables";
+@import "variables.scss";
 
 // Mixins
-@import "./ui/mixin/mixin";
+@import "./ui/mixin/mixin.scss";
 
 // Reset
-@import "./ui/input/input";
-@import "./ui/button/button";
-@import "./ui/radio/radio";
-@import "./ui/alert/alert";
-@import "./ui/collapse/collapse";
-@import "./ui/card/card";
-@import "./ui/table/table";
-@import "./ui/modal/modal";
-@import "./ui/popover/popover";
-@import "./ui/notification/notification";
-@import "./ui/checkbox/checkbox";
-@import "./ui/form/form";
-@import "./ui/private-layout/private-layout";
-@import "./ui/header/header";
-@import "./ui/sidemenu/sidemenu";
-@import "./ui/errors/errors";
+@import "./ui/input/input.scss";
+@import "./ui/button/button.scss";
+@import "./ui/radio/radio.scss";
+@import "./ui/alert/alert.scss";
+@import "./ui/collapse/collapse.scss";
+@import "./ui/card/card.scss";
+@import "./ui/table/table.scss";
+@import "./ui/modal/modal.scss";
+@import "./ui/popover/popover.scss";
+@import "./ui/notification/notification.scss";
+@import "./ui/checkbox/checkbox.scss";
+@import "./ui/form/form.scss";
+@import "./ui/private-layout/private-layout.scss";
+@import "./ui/header/header.scss";
+@import "./ui/sidemenu/sidemenu.scss";
+@import "./ui/errors/errors.scss";
 
-@import "./ui/colors/colors";
-@import "./ui/helper/helper";
+@import "./ui/colors/colors.scss";
+@import "./ui/helper/helper.scss";
 
-@import "./pages/page_edit_profile/page_edit_profile";
+@import "./pages/page_edit_profile/page_edit_profile.scss";
 
-@import "./pages/page_login/page_login";
-@import "./pages/page_register/page_register";
+@import "./pages/page_login/page_login.scss";
+@import "./pages/page_register/page_register.scss";
 
-@import "./pages/page_schedule/page_schedule";
-@import "./pages/page_employee/page_employee";
+@import "./pages/page_schedule/page_schedule.scss";
+@import "./pages/page_employee/page_employee.scss";
 
-@import "./pages/page_users/page_users";
-@import "./pages/page_references/page_references";
-@import "./pages/page_permission/page_permission";
-@import "./pages/page_facultyload/page_facultyload";
+@import "./pages/page_users/page_users.scss";
+@import "./pages/page_references/page_references.scss";
+@import "./pages/page_permission/page_permission.scss";
+@import "./pages/page_facultyload/page_facultyload.scss";
 
 // Register SCSS
 @import "./pages/page_register/page_registerStudentProfile.scss";

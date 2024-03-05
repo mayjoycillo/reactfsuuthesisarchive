@@ -8,7 +8,7 @@ import { faGifts, faHome, faRefresh } from "@fortawesome/pro-regular-svg-icons";
 
 import { GET } from "../../providers/useAxiosQuery";
 import { bgColor, name, userData } from "../../providers/companyInfo";
-import CheckUserPermission from "../../providers/CheckUserPermission";
+import useCheckUserPermission from "../../providers/useCheckUserPermission";
 import Sidemenu from "./Sidemenu";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -39,7 +39,7 @@ export default function Private(props) {
 		window.innerWidth <= 768 ? true : false
 	);
 
-	CheckUserPermission(moduleCode, moduleName, location);
+	useCheckUserPermission(moduleCode, moduleName, location);
 
 	useEffect(() => {
 		const section = document.querySelector(".private-layout");

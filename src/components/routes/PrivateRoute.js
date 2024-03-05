@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-import { PrivateLayout } from "../../components/assets/scss/ui/private-layout/private-layout.scss";
+import PrivateLayout from "../layouts/private/Private";
 
 let isLoggedIn = localStorage.getItem("token");
 
