@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { Button, Col, Form, Row, Typography, notification } from "antd";
 
-import FloatInput from "../../../providers/FloatInput";
-import validateRules from "../../../providers/validateRules";
 import ThesisFormAuthor from "./PageThesisFormComponents/ThesisFormAuthor";
+import FloatInput from "../../../providers/FloatInput";
 import FloatDatePicker from "../../../providers/FloatDatePicker";
 import FloatSelect from "../../../providers/FloatSelect";
 import { GET, POST } from "../../../providers/useAxiosQuery";
 import notificationErrors from "../../../providers/notificationErrors";
 import optionType from "../../../providers/optionType";
 
+import ModalAttachment from "./components/ModalAttachment";
+
 export default function PageThesisAdd() {
 	const location = useLocation();
 	const params = useParams();
 	const [form] = Form.useForm();
+
+	const [toggleModalAttachment, SetToggleModalAttachment] = useState({
+		open: false,
+		data: null,
+	});
+	console.log("toggleModalAttachment:", toggleModalAttachment);
+
+	const { data: dataBooks } = GET(`api/books`, "books_list");
+	console.log("dataBooks", dataBooks);
 
 	const onChange = (date, dateString) => {
 		console.log(date, dateString);
@@ -142,17 +152,25 @@ export default function PageThesisAdd() {
 				<Row gutter={(12, 12)}>
 					<Col xs={24} sm={24} md={24} lg={6}>
 						<Form.Item name="attachment_id">
-							<FloatInput
-								label="Attachment"
-								placeholder="Attachment"
-								onChange={onChange}
-							/>
+							<Button
+								onClick={() => {
+									SetToggleModalAttachment({ open: true });
+								}}
+							>
+								Upload
+							</Button>
 						</Form.Item>
 					</Col>
 				</Row>
+
 				<Button htmlType="submit" className="btn-main-primary w-10 w-xs-100">
 					Submit
 				</Button>
+
+				<ModalAttachment
+					toggleModalAttachment={toggleModalAttachment}
+					SetToggleModalAttachment={SetToggleModalAttachment}
+				/>
 			</Form>
 		</>
 	);

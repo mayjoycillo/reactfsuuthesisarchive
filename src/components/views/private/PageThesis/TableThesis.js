@@ -11,9 +11,6 @@ import {
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/pro-regular-svg-icons";
-import notificationErrors from "../../../providers/notificationErrors";
-
-import dayjs from "dayjs";
 
 export default function TableThesis(props) {
 	const {

@@ -37,13 +37,6 @@ export default function PageProfiling() {
 
 	const [form] = Form.useForm();
 
-	const { data: dataReligion } = GET(`api/ref_religion`, "ref_religion");
-
-	const { data: dataNationality } = GET(
-		`api/ref_nationality`,
-		"ref_nationality"
-	);
-
 	const { mutate: mutateProfileCreate, loading: loadingProfile } = POST(
 		`api/profile`,
 		"profile_list",
