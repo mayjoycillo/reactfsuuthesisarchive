@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { Button, Col, Form, Row, Typography, notification } from "antd";
+import {
+	Button,
+	Card,
+	Col,
+	Form,
+	Row,
+	Tabs,
+	Upload,
+	message,
+	notification,
+} from "antd";
 
 import ThesisFormAuthor from "./PageThesisFormComponents/ThesisFormAuthor";
 import FloatInput from "../../../providers/FloatInput";
@@ -12,10 +22,14 @@ import optionType from "../../../providers/optionType";
 
 import ModalAttachment from "./components/ModalAttachment";
 
+import { InboxOutlined } from "@ant-design/icons";
+
 export default function PageThesisAdd() {
 	const location = useLocation();
 	const params = useParams();
 	const [form] = Form.useForm();
+
+	const { Dragger } = Upload;
 
 	const [toggleModalAttachment, SetToggleModalAttachment] = useState({
 		open: false,
@@ -37,6 +51,26 @@ export default function PageThesisAdd() {
 		`api/books`,
 		"books"
 	);
+
+	const props = {
+		name: "file",
+		multiple: true,
+		action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
+		onChange(info) {
+			const { status } = info.file;
+			if (status !== "uploading") {
+				console.log(info.file, info.fileList);
+			}
+			if (status === "done") {
+				message.success(`${info.file.name} file uploaded successfully.`);
+			} else if (status === "error") {
+				message.error(`${info.file.name} file upload failed.`);
+			}
+		},
+		onDrop(e) {
+			console.log("Dropped files", e.dataTransfer.files);
+		},
+	};
 
 	const onFinish = async (values) => {
 		let pathname = location.pathname.split("/");
@@ -70,108 +104,145 @@ export default function PageThesisAdd() {
 
 	return (
 		<>
-			<Form onFinish={onFinish} form={form}>
-				<div
-					style={{
-						background: "#e6f7ff",
-						padding: "5px 10px",
-						borderTopLeftRadius: "20px",
-						borderTopRightRadius: "20px",
-					}}
-				>
-					<Typography.Title level={5}>Thesis Book Information</Typography.Title>
-				</div>
+			<Tabs
+				className="TABS"
+				type="card"
+				defaultActiveKey="1"
+				items={[
+					{
+						label: "Book Information",
+						key: "1",
+						children: (
+							<Form onFinish={onFinish} form={form}>
+								<Row gutter={(12, 12)}>
+									<Col xs={24} sm={24} md={24} lg={18}>
+										<Form.Item name="department_id">
+											<FloatSelect
+												label="Department"
+												placeholder="Department"
+												options={
+													department
+														? department.data.map((item) => ({
+																value: item.id,
+																label: item.department_name,
+														  }))
+														: []
+												}
+											/>
+										</Form.Item>
+									</Col>
+								</Row>
 
-				<Row gutter={(12, 12)}>
-					<Col xs={24} sm={24} md={24} lg={12}>
-						<Form.Item name="department_id">
-							<FloatSelect
-								label="Department"
-								placeholder="Department"
-								options={
-									department
-										? department.data.map((item) => ({
-												value: item.id,
-												label: item.department_name,
-										  }))
-										: []
-								}
-							/>
-						</Form.Item>
-					</Col>
-				</Row>
+								<Row gutter={(12, 12)}>
+									<Col xs={24} sm={24} md={24} lg={18}>
+										<Form.Item name="bookname">
+											<FloatInput
+												label="Thesis Title"
+												placeholder="Thesis Title"
+												onChange={onChange}
+											/>
+										</Form.Item>
+									</Col>
+								</Row>
+								<Row gutter={(12, 12)}>
+									<Col xs={24} sm={24} md={24} lg={6}>
+										<Form.Item name="datepublish">
+											<FloatDatePicker
+												label="Year Published"
+												placeholder="Year Published"
+												onChange={onChange}
+												format="MM-YYYY"
+												picker="month"
+											/>
+										</Form.Item>
+									</Col>
+									<Col xs={24} sm={24} md={24} lg={6}>
+										<Form.Item name="type">
+											<FloatSelect
+												label="Type of Text"
+												placeholder="Type of Text"
+												options={optionType}
+											/>
+										</Form.Item>
+									</Col>
+									<Col xs={24} sm={24} md={24} lg={12}>
+										<Form.Item name="university">
+											<FloatInput
+												label="University"
+												placeholder="University"
+												onChange={onChange}
+											/>
+										</Form.Item>
+									</Col>
+								</Row>
+								<Button
+									htmlType="submit"
+									className="btn-main-primary w-10 w-xs-100"
+								>
+									Submit
+								</Button>
+							</Form>
+						),
+					},
+					{
+						label: "Authors Information",
+						key: "2",
+						children: (
+							<>
+								<Col xs={24} sm={24} md={24} lg={24}>
+									<ThesisFormAuthor />
+								</Col>
+								<Button
+									htmlType="submit"
+									className="btn-main-primary w-10 w-xs-100"
+								>
+									Submit
+								</Button>
+							</>
+						),
+					},
+					{
+						label: "Publishable Paper",
+						key: "3",
+						children: (
+							<Form onFinish={onFinish} form={form}>
+								<Row gutter={(12, 12)}>
+									<Col xs={24} sm={24} md={24} lg={24}>
+										<Form.Item name="attachment_id">
+											<Dragger {...props}>
+												<p className="ant-upload-drag-icon">
+													<InboxOutlined />
+												</p>
+												<p className="ant-upload-text">
+													Click or drag a <b> PDF file</b> to this area to
+													upload
+												</p>
+												<p className="ant-upload-hint">
+													Support for a single or bulk upload. Strictly
+													prohibited from uploading company data or other banned
+													files.
+												</p>
+											</Dragger>
+										</Form.Item>
+									</Col>
+								</Row>
 
-				<Row gutter={(12, 12)}>
-					<Col xs={24} sm={24} md={24} lg={12}>
-						<Form.Item name="bookname">
-							<FloatInput
-								label="Thesis Title"
-								placeholder="Thesis Title"
-								onChange={onChange}
-							/>
-						</Form.Item>
-					</Col>
-				</Row>
-			</Form>
-			<Col xs={24} sm={24} md={24} lg={24}>
-				<ThesisFormAuthor />
-			</Col>
+								<Button
+									htmlType="submit"
+									className="btn-main-primary w-10 w-xs-100"
+								>
+									Submit
+								</Button>
 
-			<Form onFinish={onFinish} form={form}>
-				<Row gutter={(12, 12)}>
-					<Col xs={24} sm={24} md={24} lg={6}>
-						<Form.Item name="datepublish">
-							<FloatDatePicker
-								label="Year Published"
-								placeholder="Year Published"
-								onChange={onChange}
-								format="YYYY-MM"
-								picker="month"
-							/>
-						</Form.Item>
-					</Col>
-					<Col xs={24} sm={24} md={24} lg={6}>
-						<Form.Item name="type">
-							<FloatSelect
-								label="Type of Text"
-								placeholder="Type of Text"
-								options={optionType}
-							/>
-						</Form.Item>
-					</Col>
-					<Col xs={24} sm={24} md={24} lg={12}>
-						<Form.Item name="university">
-							<FloatInput
-								label="University"
-								placeholder="University"
-								onChange={onChange}
-							/>
-						</Form.Item>
-					</Col>
-				</Row>
-				<Row gutter={(12, 12)}>
-					<Col xs={24} sm={24} md={24} lg={6}>
-						<Form.Item name="attachment_id">
-							<Button
-								onClick={() => {
-									SetToggleModalAttachment({ open: true });
-								}}
-							>
-								Upload
-							</Button>
-						</Form.Item>
-					</Col>
-				</Row>
-
-				<Button htmlType="submit" className="btn-main-primary w-10 w-xs-100">
-					Submit
-				</Button>
-
-				<ModalAttachment
-					toggleModalAttachment={toggleModalAttachment}
-					SetToggleModalAttachment={SetToggleModalAttachment}
-				/>
-			</Form>
+								<ModalAttachment
+									toggleModalAttachment={toggleModalAttachment}
+									SetToggleModalAttachment={SetToggleModalAttachment}
+								/>
+							</Form>
+						),
+					},
+				]}
+			/>
 		</>
 	);
 }

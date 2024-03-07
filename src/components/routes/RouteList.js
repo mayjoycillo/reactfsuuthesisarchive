@@ -115,7 +115,7 @@ export default function RouteList() {
 								link: "/dashboard",
 							},
 							{
-								name: "Thesis",
+								name: "Books",
 								link: "/thesis/books",
 							},
 							{
@@ -143,8 +143,8 @@ export default function RouteList() {
 								link: "/dashboard",
 							},
 							{
-								name: "Thesis",
-								link: "/thesis",
+								name: "Books",
+								link: "/thesis/books",
 							},
 							{
 								name: "Edit",

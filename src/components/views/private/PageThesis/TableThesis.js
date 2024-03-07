@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Row, Button, Col, Table, notification, Popconfirm } from "antd";
 import { useEffect, useState } from "react";
 import { DELETE } from "../../../providers/useAxiosQuery";
@@ -23,6 +24,7 @@ export default function TableThesis(props) {
 		refetchSource,
 	} = props;
 
+	const navigate = useNavigate();
 	const [refreshData, setRefreshData] = useState(false);
 
 	const onChangeTable = (pagination, filters, sorter) => {
@@ -75,17 +77,15 @@ export default function TableThesis(props) {
 							align="center"
 							width={150}
 							render={(text, record) => {
+								console.log("record", record);
 								return (
 									<>
 										<Button
 											type="link"
 											className="color-1"
-											// onClick={() =>
-											// 	setToggleModalFormEntranceExamSchedule({
-											// 		open: true,
-											// 		data: record,
-											// 	})
-											// }
+											onClick={() =>
+												navigate(`${location.pathname}/edit/${record.id}`)
+											}
 										>
 											<FontAwesomeIcon icon={faPencil} />
 										</Button>
@@ -120,6 +120,9 @@ export default function TableThesis(props) {
 							title="Department"
 							key="department_id"
 							dataIndex="department_id"
+							render={(text, record) => {
+								return <>{record.department_name}</>;
+							}}
 						/>
 						<Table.Column
 							title="Thesis Title"
@@ -139,6 +142,11 @@ export default function TableThesis(props) {
 							dataIndex="datepublish"
 						/>
 						<Table.Column title="Type of Text" key="type" dataIndex="type" />
+						<Table.Column
+							title="Publishable Paper"
+							key="type"
+							dataIndex="file_name"
+						/>
 					</Table>
 				</Col>
 

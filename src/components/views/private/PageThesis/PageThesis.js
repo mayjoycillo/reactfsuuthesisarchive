@@ -13,7 +13,6 @@ export default function PageThesis() {
 	const [sortInfo, setSortInfo] = useState({
 		order: "descend",
 		columnKey: "created_at",
-		// status: location.pathname === "/thesis" ? "Active" : "Deactivated",
 	});
 
 	const [tableFilter, setTableFilter] = useState({
@@ -22,15 +21,11 @@ export default function PageThesis() {
 		search: "",
 		sort_field: "created_at",
 		sort_order: "desc",
-		status: "Active",
-		from: location.pathname,
 	});
 
 	const { data: dataSource, refetch: refetchSource } = GET(
-		`api/books`,
-		"books_list",
-		(res) => {},
-		false
+		`api/books?${new URLSearchParams(tableFilter)}`,
+		"books_list"
 	);
 
 	useEffect(() => {
@@ -40,8 +35,6 @@ export default function PageThesis() {
 			search: "",
 			sort_field: "created_at",
 			sort_order: "desc",
-			status: location.pathname === "/thesis" ? "Active" : "Deactivated",
-			from: location.pathname,
 		});
 
 		setSortInfo({
