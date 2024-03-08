@@ -124,6 +124,17 @@ export default function PageProfiling() {
 											onChange={onChange}
 										/>
 									</Form.Item>
+
+									<Form.Item
+										name="email"
+										rules={[validateRules.email]}
+										style={{ marginBottom: 0 }}
+									>
+										<FloatInput
+											label="Email Address"
+											placeholder="Email Address"
+										/>
+									</Form.Item>
 								</Col>
 							</Row>
 						</Card>
@@ -141,7 +152,16 @@ export default function PageProfiling() {
 				</div>
 				<Card>
 					<Row gutter={[12, 12]}>
-						<Col xs={24} sm={24} md={8} lg={8}>
+						<Col xs={24} sm={24} md={24} lg={8}>
+							<Form.Item name="schoolid" style={{ marginBottom: 0 }}>
+								<FloatInput
+									label="Student ID Number"
+									placeholder="Student ID Number"
+									onChange={onChange}
+								/>
+							</Form.Item>
+						</Col>
+						<Col xs={24} sm={24} md={24} lg={8}>
 							<Form.Item name="fullname" style={{ marginBottom: 0 }}>
 								<FloatInput
 									label="Fullname"
@@ -150,22 +170,42 @@ export default function PageProfiling() {
 								/>
 							</Form.Item>
 						</Col>
-						<Col xs={24} sm={24} md={8} lg={8}>
-							<Form.Item name="schoolid" style={{ marginBottom: 0 }}>
+						<Col xs={24} sm={24} md={24} lg={8}>
+							<Form.Item name="course" style={{ marginBottom: 0 }}>
 								<FloatInput
-									label="School ID"
-									placeholder="School ID"
+									label="Course"
+									placeholder="Course"
 									onChange={onChange}
 								/>
 							</Form.Item>
 						</Col>
-						<Col xs={24} sm={24} md={8} lg={8}>
-							<Form.Item
-								name="email"
-								rules={[validateRules.email]}
-								style={{ marginBottom: 0 }}
-							>
-								<FloatInput label="Email Address" placeholder="Email Address" />
+						<Col xs={24} sm={24} md={24} lg={8}>
+							<Form.Item name="yeearlevel" style={{ marginBottom: 0 }}>
+								<FloatInput
+									label="Year Level"
+									placeholder="Year Level"
+									onChange={onChange}
+								/>
+							</Form.Item>
+						</Col>
+						<Col xs={24} sm={24} md={24} lg={8}>
+							<Form.Item name="graduationyear">
+								<FloatDatePicker
+									label="Year Graduated"
+									placeholder="Year Graduated"
+									onChange={onChange}
+									format="YYYY"
+									picker="year"
+								/>
+							</Form.Item>
+						</Col>
+						<Col xs={24} sm={24} md={24} lg={8}>
+							<Form.Item name="role" style={{ marginBottom: 0 }}>
+								<FloatInput
+									label="Role"
+									placeholder="Role"
+									onChange={onChange}
+								/>
 							</Form.Item>
 						</Col>
 					</Row>

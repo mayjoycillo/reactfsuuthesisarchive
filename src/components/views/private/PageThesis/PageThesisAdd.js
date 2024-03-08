@@ -76,6 +76,8 @@ export default function PageThesisAdd() {
 		let pathname = location.pathname.split("/");
 		let data = new FormData();
 
+		let data2 = { ...values, book_id, params };
+
 		// data.append("id", params.id ? params.id : "");
 
 		// Add Account Information
