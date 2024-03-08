@@ -112,11 +112,7 @@ export default function ThesisFormAuthor(props) {
 	};
 
 	return (
-		<Form
-			form={form}
-			// onFinish={onFinish}
-			initialValues={{ author_list: [{}] }}
-		>
+		<>
 			<Row gutter={[12, 12]}>
 				<Col xs={24} sm={24} md={24} lg={24} xl={24}>
 					<Form.List name="author_list">
@@ -152,6 +148,6 @@ export default function ThesisFormAuthor(props) {
 					</Form.List>
 				</Col>
 			</Row>
-		</Form>
+		</>
 	);
 }
