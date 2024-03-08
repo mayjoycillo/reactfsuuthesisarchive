@@ -134,6 +134,9 @@ export default function TableThesis(props) {
 							title="Authors"
 							key="bookauthor_id"
 							dataIndex="bookauthor_id"
+							render={(text, record) => {
+								return <>{record.author_name}</>;
+							}}
 						/>
 
 						<Table.Column
