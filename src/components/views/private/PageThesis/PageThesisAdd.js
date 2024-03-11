@@ -84,14 +84,13 @@ export default function PageThesisAdd() {
 		// Notification
 		mutatethesis(data, {
 			onSuccess: (res) => {
-				console.log("res", res);
 				if (res.success) {
 					notification.success({
 						message: "Thesis Book Information",
 						description: res.message,
 					});
 
-					// navigate(`/thesis/books/edit/${dataBooks.id}`);
+					navigate(`/thesis/books/edit/${dataBooks.id}`);
 				}
 			},
 			onError: (err) => {

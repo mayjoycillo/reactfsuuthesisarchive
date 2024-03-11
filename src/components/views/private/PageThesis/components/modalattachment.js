@@ -1,11 +1,8 @@
 import { Button, Form, Modal } from "antd";
 import React from "react";
-import { GET } from "../../../../providers/useAxiosQuery";
 
 export default function ModalAttachment(props) {
 	const { toggleModalAttachment, SetToggleModalAttachment } = props;
-
-	console.log(toggleModalAttachment);
 
 	const [form] = Form.useForm();
 	return (
