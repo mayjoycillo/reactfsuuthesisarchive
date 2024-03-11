@@ -18,8 +18,7 @@ export default function TableThesis(props) {
 		dataSource,
 		tableFilter,
 		setTableFilter,
-		sortInfo,
-		setSortInfo,
+
 		location,
 		refetchSource,
 	} = props;
@@ -135,7 +134,13 @@ export default function TableThesis(props) {
 							key="bookauthor_id"
 							dataIndex="bookauthor_id"
 							render={(text, record) => {
-								return <>{record.author_name}</>;
+								return (
+									<>
+										{record.authors.map(
+											(item) => `${item.firstname} ${item.lastname}, `
+										)}
+									</>
+								);
 							}}
 						/>
 

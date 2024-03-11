@@ -10,11 +10,6 @@ export default function PageThesis() {
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	const [sortInfo, setSortInfo] = useState({
-		order: "descend",
-		columnKey: "created_at",
-	});
-
 	const [tableFilter, setTableFilter] = useState({
 		page: 1,
 		page_size: 50,
@@ -35,11 +30,6 @@ export default function PageThesis() {
 			search: "",
 			sort_field: "created_at",
 			sort_order: "desc",
-		});
-
-		setSortInfo({
-			order: "descend",
-			columnKey: "created_at",
 		});
 
 		return () => {};
@@ -66,8 +56,6 @@ export default function PageThesis() {
 					dataSource={dataSource}
 					tableFilter={tableFilter}
 					setTableFilter={setTableFilter}
-					sortInfo={sortInfo}
-					setSortInfo={setSortInfo}
 					location={location}
 					refetchSource={refetchSource}
 				/>

@@ -37,30 +37,26 @@ export default function PageThesisAdd() {
 			let data = res.data;
 			console.log("data", data);
 
-			// let author_list = [{}];
+			let author_list = [{}];
 
-			// if (data.authors && data.authors.legth > 0) {
-			// 	author_list = data.authors;
-			// }
+			if (data.authors && data.authors.legth > 0) {
+				author_list = data.authors;
+			}
 
-			// let department_id = null;
+			let department_id = null;
 
-			// if (
-			// 	data.ref_departments &&
-			// 	data.ref_departments[0] &&
-			// 	data.ref_departments[0].department_id
-			// ) {
-			// 	department_id = data.ref_departments[0].department_id;
-			// }
+			if (data.ref_departments) {
+				department_id = data.ref_departments.id;
+			}
 
-			form.setFieldValue({
+			form.setFieldsValue({
 				bookname: data.bookname,
 				datepublish: data.datepublish,
 				type: data.type,
 				university: data.university,
 
-				// author_list: author_list,
-				// department_id: department_id,
+				author_list: author_list,
+				department_id: department_id,
 			});
 		}
 	});

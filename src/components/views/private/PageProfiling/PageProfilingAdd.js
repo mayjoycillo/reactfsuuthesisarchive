@@ -37,6 +37,10 @@ export default function PageProfiling() {
 
 	const [form] = Form.useForm();
 
+	const { data: roles } = GET(`api/user_roles`, "user_role");
+
+	console.log("roles:", roles);
+
 	const { mutate: mutateProfileCreate, loading: loadingProfile } = POST(
 		`api/profile`,
 		"profile_list",
@@ -152,25 +156,53 @@ export default function PageProfiling() {
 				</div>
 				<Card>
 					<Row gutter={[12, 12]}>
-						<Col xs={24} sm={24} md={24} lg={8}>
-							<Form.Item name="schoolid" style={{ marginBottom: 0 }}>
+						<Col xs={24} sm={24} md={24} lg={6}>
+							<Form.Item name="firstname" style={{ marginBottom: 0 }}>
 								<FloatInput
-									label="Student ID Number"
-									placeholder="Student ID Number"
+									label="Firstname"
+									placeholder="Firstname"
 									onChange={onChange}
 								/>
 							</Form.Item>
 						</Col>
-						<Col xs={24} sm={24} md={24} lg={8}>
-							<Form.Item name="fullname" style={{ marginBottom: 0 }}>
+						<Col xs={24} sm={24} md={24} lg={6}>
+							<Form.Item name="middlename" style={{ marginBottom: 0 }}>
 								<FloatInput
-									label="Fullname"
-									placeholder="Fullname"
+									label="Middlename"
+									placeholder="Middlename"
 									onChange={onChange}
 								/>
 							</Form.Item>
 						</Col>
-						<Col xs={24} sm={24} md={24} lg={8}>
+						<Col xs={24} sm={24} md={24} lg={6}>
+							<Form.Item name="lastname" style={{ marginBottom: 0 }}>
+								<FloatInput
+									label="Lastname"
+									placeholder="Lastname"
+									onChange={onChange}
+								/>
+							</Form.Item>
+						</Col>
+
+						<Col xs={24} sm={24} md={24} lg={6}>
+							<Form.Item name="suffix" style={{ marginBottom: 0 }}>
+								<FloatInput
+									label="Suffix"
+									placeholder="Suffix"
+									onChange={onChange}
+								/>
+							</Form.Item>
+						</Col>
+						<Col xs={24} sm={24} md={24} lg={6}>
+							<Form.Item name="contact" style={{ marginBottom: 0 }}>
+								<FloatInput
+									label="Contact Number"
+									placeholder="Contact Number"
+									onChange={onChange}
+								/>
+							</Form.Item>
+						</Col>
+						<Col xs={24} sm={24} md={24} lg={6}>
 							<Form.Item name="course" style={{ marginBottom: 0 }}>
 								<FloatInput
 									label="Course"
@@ -179,16 +211,7 @@ export default function PageProfiling() {
 								/>
 							</Form.Item>
 						</Col>
-						<Col xs={24} sm={24} md={24} lg={8}>
-							<Form.Item name="yeearlevel" style={{ marginBottom: 0 }}>
-								<FloatInput
-									label="Year Level"
-									placeholder="Year Level"
-									onChange={onChange}
-								/>
-							</Form.Item>
-						</Col>
-						<Col xs={24} sm={24} md={24} lg={8}>
+						<Col xs={24} sm={24} md={24} lg={6}>
 							<Form.Item name="graduationyear">
 								<FloatDatePicker
 									label="Year Graduated"
@@ -199,16 +222,26 @@ export default function PageProfiling() {
 								/>
 							</Form.Item>
 						</Col>
-						<Col xs={24} sm={24} md={24} lg={8}>
+						<Col xs={24} sm={24} md={24} lg={6}>
 							<Form.Item name="role" style={{ marginBottom: 0 }}>
-								<FloatInput
+								<FloatSelect
 									label="Role"
 									placeholder="Role"
-									onChange={onChange}
+									options={
+										roles
+											? roles.data.map((item) => ({
+													value: item.id,
+													label: item.role,
+											  }))
+											: []
+									}
 								/>
 							</Form.Item>
 						</Col>
 					</Row>
+					<Button htmlType="submit" className="btn-main-primary w-10 w-xs-100">
+						Submit
+					</Button>
 				</Card>
 			</Form>
 		</>
