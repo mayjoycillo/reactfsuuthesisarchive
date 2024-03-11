@@ -14,15 +14,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/pro-regular-svg-icons";
 
 export default function TableThesis(props) {
-	const {
-		dataSource,
-		tableFilter,
-		setTableFilter,
-		sortInfo,
-		setSortInfo,
-		location,
-		refetchSource,
-	} = props;
+	const { dataSource, tableFilter, setTableFilter, location, refetchSource } =
+		props;
 
 	const navigate = useNavigate();
 	const [refreshData, setRefreshData] = useState(false);
@@ -77,7 +70,6 @@ export default function TableThesis(props) {
 							align="center"
 							width={150}
 							render={(text, record) => {
-								console.log("record", record);
 								return (
 									<>
 										<Button
