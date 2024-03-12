@@ -43,9 +43,7 @@ export default function PageProfiling() {
 
 	const { mutate: mutateProfileCreate, loading: loadingProfile } = POST(
 		`api/profile`,
-		"profile_list",
-		(res) => {},
-		false
+		"profile_list"
 	);
 
 	const onFinish = async (values) => {
@@ -62,14 +60,20 @@ export default function PageProfiling() {
 			data.append("password", values.password);
 		}
 
-		data.append("fullname", values.fullname);
+		data.append("firstname", values.firstname);
+		data.append("middlename", values.middlename);
+		data.append("lastname", values.lastname);
+		data.append("suffix", values.suffix);
 		data.append("school_id", values.school_id);
+		data.append("contact", values.contact);
+		data.append("course", values.course);
+		data.append("role", values.role);
 
 		mutateProfileCreate(data, {
 			onSuccess: (res) => {
 				if (res.success) {
 					notification.success({
-						message: "Profiling",
+						message: "Users",
 						description: res.message,
 					});
 				}
@@ -194,6 +198,15 @@ export default function PageProfiling() {
 							</Form.Item>
 						</Col>
 						<Col xs={24} sm={24} md={24} lg={6}>
+							<Form.Item name="school_id" style={{ marginBottom: 0 }}>
+								<FloatInput
+									label="School ID Number"
+									placeholder="School ID Number"
+									onChange={onChange}
+								/>
+							</Form.Item>
+						</Col>
+						<Col xs={24} sm={24} md={24} lg={6}>
 							<Form.Item name="contact" style={{ marginBottom: 0 }}>
 								<FloatInput
 									label="Contact Number"
@@ -211,17 +224,7 @@ export default function PageProfiling() {
 								/>
 							</Form.Item>
 						</Col>
-						<Col xs={24} sm={24} md={24} lg={6}>
-							<Form.Item name="graduationyear">
-								<FloatDatePicker
-									label="Year Graduated"
-									placeholder="Year Graduated"
-									onChange={onChange}
-									format="YYYY"
-									picker="year"
-								/>
-							</Form.Item>
-						</Col>
+
 						<Col xs={24} sm={24} md={24} lg={6}>
 							<Form.Item name="role" style={{ marginBottom: 0 }}>
 								<FloatSelect

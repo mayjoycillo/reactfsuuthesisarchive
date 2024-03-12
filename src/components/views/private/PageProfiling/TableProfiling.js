@@ -26,6 +26,8 @@ export default function TableProfiling(props) {
 		refetchSource,
 	} = props;
 
+	console.log("dataSource: ", dataSource);
+
 	const [refreshData, setRefreshData] = useState(false);
 
 	const onChangeTable = (pagination, filters, sorter) => {
@@ -39,7 +41,7 @@ export default function TableProfiling(props) {
 	};
 
 	useEffect(() => {
-		// refetchSource(dataSource);
+		refetchSource(dataSource);
 
 		return () => {};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -120,6 +122,11 @@ export default function TableProfiling(props) {
 						/>
 
 						<Table.Column
+							title="Username"
+							key="username"
+							dataIndex="username"
+						/>
+						<Table.Column
 							title="Fullname"
 							key="fullname"
 							dataIndex="fullname"
@@ -127,16 +134,16 @@ export default function TableProfiling(props) {
 						<Table.Column title="email" key="email" dataIndex="email" />
 
 						<Table.Column
-							title="Authors"
-							key="bookauthor_id"
-							dataIndex="bookauthor_id"
+							title="School ID"
+							key="school_id"
+							dataIndex="school_id"
+						/>
+						<Table.Column
+							title="Role"
+							key="user_role_id"
+							dataIndex="user_role_id"
 						/>
 
-						<Table.Column
-							title="Year Published"
-							key="datepublish"
-							dataIndex="datepublish"
-						/>
 						<Table.Column title="Type of Text" key="type" dataIndex="type" />
 					</Table>
 				</Col>

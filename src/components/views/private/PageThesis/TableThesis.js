@@ -131,15 +131,11 @@ export default function TableThesis(props) {
 
 						<Table.Column
 							title="Authors"
-							key="bookauthor_id"
-							dataIndex="bookauthor_id"
+							key="profile_id"
+							dataIndex="profile_id"
 							render={(text, record) => {
 								return (
-									<>
-										{record.authors.map(
-											(item) => `${item.firstname} ${item.lastname}, `
-										)}
-									</>
+									<>{record.authors.map((item) => `${item.firstname}, `)}</>
 								);
 							}}
 						/>

@@ -91,6 +91,12 @@ export default function PageThesisAdd() {
 			data.append(`author_list[${index}][lastname]`, author.lastname);
 			data.append(`author_list[${index}][suffix]`, author.suffix);
 			data.append(`author_list[${index}][role]`, author.role);
+			data.append(`author_list[${index}][course]`, author.course);
+			data.append(
+				`author_list[${index}][school_id]`,
+				parseInt(author.school_id)
+			);
+			data.append(`author_list[${index}][contact]`, author.contact);
 		});
 
 		// Notification

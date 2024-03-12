@@ -81,6 +81,22 @@ export default function ThesisFormAuthor(props) {
 							<FloatInput label="Course" placeholder="Course"></FloatInput>
 						</Form.Item>
 					</Col>
+					<Col xs={24} sm={24} md={24} lg={6}>
+						<Form.Item {...restField} name={[name, "school_id"]}>
+							<FloatInput
+								label="School ID Number"
+								placeholder="School ID Number"
+							></FloatInput>
+						</Form.Item>
+					</Col>
+					<Col xs={24} sm={24} md={24} lg={6}>
+						<Form.Item {...restField} name={[name, "contact"]}>
+							<FloatInput
+								label="Contact Number"
+								placeholder="Contact Number"
+							></FloatInput>
+						</Form.Item>
+					</Col>
 
 					<Col xs={24} sm={24} md={4} lg={4} xl={4}>
 						<div className="action">

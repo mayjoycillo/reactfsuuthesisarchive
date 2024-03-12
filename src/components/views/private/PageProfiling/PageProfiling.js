@@ -4,16 +4,11 @@ import React, { useEffect, useState } from "react";
 import TableProfiling from "./TableProfiling";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/pro-regular-svg-icons";
+import { GET } from "../../../providers/useAxiosQuery";
 
 export default function PageProfiling() {
 	const navigate = useNavigate();
 	const location = useLocation();
-
-	const [sortInfo, setSortInfo] = useState({
-		order: "descend",
-		columnKey: "created_at",
-		// status: location.pathname === "/thesis" ? "Active" : "Deactivated",
-	});
 
 	const [tableFilter, setTableFilter] = useState({
 		page: 1,
@@ -25,6 +20,11 @@ export default function PageProfiling() {
 		from: location.pathname,
 	});
 
+	const { data: dataSource, refetch: refetchSource } = GET(
+		`api/profile?${new URLSearchParams(tableFilter)}`,
+		"profile_list"
+	);
+
 	useEffect(() => {
 		setTableFilter({
 			page: 1,
@@ -34,11 +34,6 @@ export default function PageProfiling() {
 			sort_order: "desc",
 			status: location.pathname === "/users" ? "Active" : "Deactivated",
 			from: location.pathname,
-		});
-
-		setSortInfo({
-			order: "descend",
-			columnKey: "created_at",
 		});
 
 		return () => {};
@@ -62,13 +57,11 @@ export default function PageProfiling() {
 
 			<Col xs={24} sm={24} md={24}>
 				<TableProfiling
-					// dataSource={dataSource}
+					dataSource={dataSource}
 					tableFilter={tableFilter}
 					setTableFilter={setTableFilter}
-					sortInfo={sortInfo}
-					setSortInfo={setSortInfo}
 					location={location}
-					// refetchSource={refetchSource}
+					refetchSource={refetchSource}
 				/>
 			</Col>
 		</Row>
