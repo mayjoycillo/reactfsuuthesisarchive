@@ -37,11 +37,28 @@ export default function PageThesisAdd() {
 			let data = res.data;
 			console.log("data", data);
 
-			let author_list = [{}];
+			let author_list = [];
 
-			if (data.authors && data.authors.legth > 0) {
-				author_list = data.authors;
+			console.log("data.authors", data.authors);
+			if (data.authors && data.authors.length > 0) {
+				author_list = data.authors.map((item) => {
+					return {
+						...item,
+						firstname: item.profile.firstname,
+						middlename: item.profile.middlename,
+						lastname: item.profile.lastname,
+						suffix: item.profile.suffix,
+						role: item.profile.role,
+						course: item.profile.course,
+						school_id: item.profile.school_id,
+						contact: item.profile.school_id,
+					};
+				});
+			} else {
+				author_list = [{}];
 			}
+
+			console.log("author_list", author_list);
 
 			let department_id = null;
 
@@ -62,7 +79,7 @@ export default function PageThesisAdd() {
 	});
 
 	const { mutate: mutatethesis, loading: loadingthesis } = POST(
-		`api/books`,
+		`api/update_book/${params.id}`,
 		"books"
 	);
 
@@ -73,6 +90,7 @@ export default function PageThesisAdd() {
 		// data.append("id", params.id ? params.id : "");
 
 		// Add Book Information
+
 		data.append("department_id", values.department_id);
 		data.append("bookname", values.bookname);
 		data.append("datepublish", values.datepublish);
@@ -89,6 +107,9 @@ export default function PageThesisAdd() {
 			data.append(`author_list[${index}][lastname]`, author.lastname);
 			data.append(`author_list[${index}][suffix]`, author.suffix);
 			data.append(`author_list[${index}][role]`, author.role);
+			data.append(`author_list[${index}][contact]`, author.contact);
+			data.append(`author_list[${index}][course]`, author.course);
+			data.append(`author_list[${index}][school_id]`, author.school_id);
 		});
 
 		const props = {
@@ -195,10 +216,10 @@ export default function PageThesisAdd() {
 					</Col>
 				</Row>
 
-				<Row gutter={(12, 12)}>
+				{/* <Row gutter={(12, 12)}>
 					<Col xs={24} sm={24} md={24} lg={24}>
 						<Form.Item name="attachment_id">
-							{/* <Dragger {...props}>
+							<Dragger {...props}>
 								<p className="ant-upload-drag-icon">
 									<InboxOutlined />
 								</p>
@@ -209,10 +230,10 @@ export default function PageThesisAdd() {
 									Support for a single or bulk upload. Strictly prohibited from
 									uploading company data or other banned files.
 								</p>
-							</Dragger> */}
+							</Dragger>
 						</Form.Item>
 					</Col>
-				</Row>
+				</Row> */}
 
 				<ModalAttachment
 					toggleModalAttachment={toggleModalAttachment}

@@ -16,6 +16,7 @@ export default function PageThesis() {
 		search: "",
 		sort_field: "created_at",
 		sort_order: "desc",
+		status: "Active",
 	});
 
 	const { data: dataSource, refetch: refetchSource } = GET(
@@ -24,16 +25,10 @@ export default function PageThesis() {
 	);
 
 	useEffect(() => {
-		setTableFilter({
-			page: 1,
-			page_size: 50,
-			search: "",
-			sort_field: "created_at",
-			sort_order: "desc",
-		});
+		refetchSource();
 
 		return () => {};
-	}, [location]);
+	}, [tableFilter]);
 
 	return (
 		<Row gutter={[12, 12]}>
@@ -57,7 +52,6 @@ export default function PageThesis() {
 					tableFilter={tableFilter}
 					setTableFilter={setTableFilter}
 					location={location}
-					refetchSource={refetchSource}
 				/>
 			</Col>
 		</Row>

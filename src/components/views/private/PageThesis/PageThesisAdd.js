@@ -23,6 +23,8 @@ import optionType from "../../../providers/optionType";
 import ModalAttachment from "./components/ModalAttachment";
 
 import { InboxOutlined } from "@ant-design/icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUpFromBracket } from "@fortawesome/pro-regular-svg-icons";
 
 const { Title } = Typography;
 
@@ -48,28 +50,15 @@ export default function PageThesisAdd() {
 		"books"
 	);
 
-	const props = {
-		name: "file",
-		multiple: true,
-		action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
-		onChange(info) {
-			const { status } = info.file;
-			if (status !== "uploading") {
-				console.log(info.file, info.fileList);
-			}
-			if (status === "done") {
-				message.success(`${info.file.name} file uploaded successfully.`);
-			} else if (status === "error") {
-				message.error(`${info.file.name} file upload failed.`);
-			}
-		},
-		onDrop(e) {
-			console.log("Dropped files", e.dataTransfer.files);
+	const propsUpload = {
+		accept: "application/pdf",
+		beforeUpload: (file) => {
+			return false;
 		},
 	};
 
-	const onFinish = async (values) => {
-		let pathname = location.pathname.split("/");
+	const onFinish = (values) => {
+		console.log("onFinish values", values);
 		let data = new FormData();
 
 		// data.append("id", params.id ? params.id : "");
@@ -77,10 +66,17 @@ export default function PageThesisAdd() {
 		// Add Book Information
 		data.append("department_id", values.department_id);
 		data.append("bookname", values.bookname);
-		data.append("datepublish", values.datepublish);
+		if (values.datepublish) {
+			data.append("datepublish", values.datepublish.format("YYYY-MM"));
+		} else {
+			data.append("datepublish", "");
+		}
 		data.append("type", values.type);
 		data.append("university", values.university);
-		// data.append("attachment_id", values.attachment_id);
+
+		if (values.pdf_file && values.pdf_file.file) {
+			data.append("pdf_file", values.pdf_file.file, values.pdf_file.file.name);
+		}
 
 		// add author information
 
@@ -110,6 +106,11 @@ export default function PageThesisAdd() {
 					});
 
 					// navigate(`/thesis/books/edit/${dataBooks.id}`);
+				} else {
+					notification.error({
+						message: "Thesis Book Information",
+						description: res.message,
+					});
 				}
 			},
 			onError: (err) => {
@@ -142,6 +143,7 @@ export default function PageThesisAdd() {
 								<FloatSelect
 									label="Department"
 									placeholder="Department"
+									required
 									options={
 										department
 											? department.data.map((item) => ({
@@ -158,7 +160,11 @@ export default function PageThesisAdd() {
 					<Row gutter={(12, 12)}>
 						<Col xs={24} sm={24} md={24} lg={18}>
 							<Form.Item name="bookname">
-								<FloatInput label="Thesis Title" placeholder="Thesis Title" />
+								<FloatInput
+									label="Thesis Title"
+									placeholder="Thesis Title"
+									required
+								/>
 							</Form.Item>
 						</Col>
 					</Row>
@@ -173,6 +179,7 @@ export default function PageThesisAdd() {
 								<FloatDatePicker
 									label="Year Published"
 									placeholder="Year Published"
+									required
 									format="MM-YYYY"
 									picker="month"
 								/>
@@ -183,32 +190,32 @@ export default function PageThesisAdd() {
 								<FloatSelect
 									label="Type of Text"
 									placeholder="Type of Text"
+									required
 									options={optionType}
 								/>
 							</Form.Item>
 						</Col>
 						<Col xs={24} sm={24} md={24} lg={12}>
 							<Form.Item name="university">
-								<FloatInput label="University" placeholder="University" />
+								<FloatInput
+									label="University"
+									placeholder="University"
+									required
+								/>
 							</Form.Item>
 						</Col>
 					</Row>
 
 					<Row gutter={(12, 12)}>
 						<Col xs={24} sm={24} md={24} lg={24}>
-							<Form.Item name="attachment_id">
-								<Dragger {...props}>
-									<p className="ant-upload-drag-icon">
-										<InboxOutlined />
-									</p>
-									<p className="ant-upload-text">
-										Click or drag a <b> PDF file</b> to this area to upload
-									</p>
-									<p className="ant-upload-hint">
-										Support for a single or bulk upload. Strictly prohibited
-										from uploading company data or other banned files.
-									</p>
-								</Dragger>
+							<Form.Item name="pdf_file" valuePropName="filelist">
+								<Upload {...propsUpload}>
+									<Button
+										icon={<FontAwesomeIcon icon={faArrowUpFromBracket} />}
+									>
+										Upload File PDF
+									</Button>
+								</Upload>
 							</Form.Item>
 						</Col>
 					</Row>

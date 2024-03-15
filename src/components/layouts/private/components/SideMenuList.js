@@ -37,21 +37,14 @@ export const adminSideMenu = [
 	},
 
 	{
-		title: "Thesis",
-		path: "/thesis",
+		title: "Books",
+		path: "/thesis/books",
 		icon: <FontAwesomeIcon icon={faBook} />,
-		children: [
-			{
-				title: "Books",
-				path: "/thesis/books",
-				moduleCode: "M-01",
-			},
-			{
-				title: "Archived",
-				path: "/thesis/archived",
-				moduleCode: "M-01",
-			},
-		],
+	},
+	{
+		title: "Archived",
+		path: "/thesis/archived",
+		icon: <FontAwesomeIcon icon={faBook} />,
 	},
 
 	{

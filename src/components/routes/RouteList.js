@@ -46,6 +46,10 @@ export default function RouteList() {
 								link: "/dashboard",
 							},
 							{
+								name: "Books",
+								link: "/thesis/books",
+							},
+							{
 								name: "Edit Profile",
 							},
 						]}
@@ -247,6 +251,41 @@ export default function RouteList() {
 							},
 						]}
 						component={PageProfilingAdd}
+					/>
+				}
+			/>
+
+			<Route
+				path="/users/current/edit-profile/:id"
+				element={
+					<PrivateRoute
+						moduleName="Edit Profile"
+						title="User"
+						subtitle="VIEW / EDIT"
+						pageId="PageUserProfile"
+						pageHeaderIcon={faUsers}
+						breadcrumb={[
+							{
+								name: "Dashboard",
+								link: "/dashboard",
+							},
+							{
+								name: "Books",
+								link: "/thesis/books",
+							},
+							{
+								name: "Archived",
+								link: "/thesis/archived",
+							},
+							{
+								name: "Current",
+								link: "/users/current",
+							},
+							{
+								name: "Edit Profile",
+							},
+						]}
+						component={PageEditProfile}
 					/>
 				}
 			/>

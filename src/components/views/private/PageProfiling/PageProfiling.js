@@ -21,7 +21,7 @@ export default function PageProfiling() {
 	});
 
 	const { data: dataSource, refetch: refetchSource } = GET(
-		`api/profile?${new URLSearchParams(tableFilter)}`,
+		`api/profiles?${new URLSearchParams(tableFilter)}`,
 		"profile_list"
 	);
 

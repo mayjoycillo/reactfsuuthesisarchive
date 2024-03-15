@@ -5,36 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTrashAlt } from "@fortawesome/pro-regular-svg-icons";
 import { GET } from "../../../../providers/useAxiosQuery";
 import { useParams } from "react-router-dom";
+import FloatInputMask from "../../../../providers/FloatInputMask";
+import validateRules from "../../../../providers/validateRules";
 const { Text } = Typography;
 
 export default function ThesisFormAuthor(props) {
 	const [form] = Form.useForm();
 	const params = useParams();
 
-	const { refetch: refetchBooks } = GET(
-		`api/authors/${params.id}`,
-		["authors"],
-		(res) => {
-			if (res.data) {
-				let data = res.data;
-
-				let author_list = [{}];
-
-				if (data.books && data.books.length > 0) {
-					author_list = data.books.map((bookauthor) => {
-						return {
-							...bookauthor,
-						};
-					});
-				}
-
-				form.setFieldsValue({
-					author_list: author_list,
-				});
-			}
-		},
-		false
-	);
 	const RenderInput = (props) => {
 		const { formDisable, name, restField, fields, remove } = props;
 		return (
@@ -46,24 +24,19 @@ export default function ThesisFormAuthor(props) {
 							<FloatInput
 								label="First Name"
 								placeholder="First Name"
-							></FloatInput>
+								required
+							/>
 						</Form.Item>
 					</Col>
 					<Col xs={24} sm={24} md={24} lg={6}>
 						<Form.Item {...restField} name={[name, "middlename"]}>
-							<FloatInput
-								label="Middle Name"
-								placeholder="Middle Name"
-							></FloatInput>
+							<FloatInput label="Middle Name" placeholder="Middle Name" />
 						</Form.Item>
 					</Col>
 
 					<Col xs={24} sm={24} md={24} lg={6}>
 						<Form.Item {...restField} name={[name, "lastname"]}>
-							<FloatInput
-								label="Last Name"
-								placeholder="Last Name"
-							></FloatInput>
+							<FloatInput label="Last Name" placeholder="Last Name" required />
 						</Form.Item>
 					</Col>
 					<Col xs={24} sm={24} md={24} lg={6}>
@@ -73,28 +46,46 @@ export default function ThesisFormAuthor(props) {
 					</Col>
 					<Col xs={24} sm={24} md={24} lg={6}>
 						<Form.Item {...restField} name={[name, "role"]}>
-							<FloatInput label="Role" placeholder="Role"></FloatInput>
+							<FloatInput label="Role" placeholder="Role" required></FloatInput>
 						</Form.Item>
 					</Col>
 					<Col xs={24} sm={24} md={24} lg={6}>
 						<Form.Item {...restField} name={[name, "course"]}>
-							<FloatInput label="Course" placeholder="Course"></FloatInput>
+							<FloatInput
+								label="Course"
+								placeholder="Course"
+								required
+							></FloatInput>
 						</Form.Item>
 					</Col>
 					<Col xs={24} sm={24} md={24} lg={6}>
-						<Form.Item {...restField} name={[name, "school_id"]}>
+						<Form.Item
+							{...restField}
+							name={[name, "school_id"]}
+							rules={[
+								{
+									min: 3,
+									max: 11,
+									message: "hjkk",
+								},
+							]}
+						>
 							<FloatInput
 								label="School ID Number"
 								placeholder="School ID Number"
+								required
 							></FloatInput>
 						</Form.Item>
 					</Col>
 					<Col xs={24} sm={24} md={24} lg={6}>
 						<Form.Item {...restField} name={[name, "contact"]}>
-							<FloatInput
-								label="Contact Number"
-								placeholder="Contact Number"
-							></FloatInput>
+							<FloatInputMask
+								label="Phone No"
+								placeholder="Phone No"
+								maskLabel="contact_number"
+								maskType="999 999 9999"
+								required
+							/>
 						</Form.Item>
 					</Col>
 

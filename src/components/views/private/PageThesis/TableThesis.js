@@ -1,30 +1,27 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Row, Button, Col, Table, notification, Popconfirm } from "antd";
-import { useEffect, useState } from "react";
-import { DELETE } from "../../../providers/useAxiosQuery";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faPencil, faTrash } from "@fortawesome/pro-regular-svg-icons";
+
+import { GET } from "../../../providers/useAxiosQuery";
 import {
 	TableGlobalSearch,
 	TablePageSize,
 	TablePagination,
 	TableShowingEntries,
 } from "../../../providers/CustomTableFilter";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil, faTrash } from "@fortawesome/pro-regular-svg-icons";
+import ModalAttachmentPreview from "./components/ModalAttachmentPreview";
 
 export default function TableThesis(props) {
-	const {
-		dataSource,
-		tableFilter,
-		setTableFilter,
+	const { dataSource, tableFilter, setTableFilter, location } = props;
 
-		location,
-		refetchSource,
-	} = props;
+	const [toggleModalPreviewPdf, setToggleModalPreviewPdf] = useState({
+		open: false,
+		data: null,
+	});
 
 	const navigate = useNavigate();
-	const [refreshData, setRefreshData] = useState(false);
 
 	const onChangeTable = (pagination, filters, sorter) => {
 		setTableFilter((prevState) => ({
@@ -35,13 +32,6 @@ export default function TableThesis(props) {
 			page_size: "50",
 		}));
 	};
-
-	useEffect(() => {
-		refetchSource(dataSource);
-
-		return () => {};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [tableFilter, refreshData]);
 
 	return (
 		<>
@@ -76,7 +66,8 @@ export default function TableThesis(props) {
 							align="center"
 							width={150}
 							render={(text, record) => {
-								console.log("record", record);
+								console.log("record: ", record);
+
 								return (
 									<>
 										<Button
@@ -120,6 +111,7 @@ export default function TableThesis(props) {
 							key="department_id"
 							dataIndex="department_id"
 							render={(text, record) => {
+								console.log("record: ", record);
 								return <>{record.department_name}</>;
 							}}
 						/>
@@ -134,9 +126,12 @@ export default function TableThesis(props) {
 							key="profile_id"
 							dataIndex="profile_id"
 							render={(text, record) => {
-								return (
-									<>{record.authors.map((item) => `${item.firstname}, `)}</>
-								);
+								console.log("record: ", record);
+								return record.authors.map((item) => {
+									return (
+										<div>{`${item.profile.firstname} ${item.profile.lastname}`}</div>
+									);
+								});
 							}}
 						/>
 
@@ -148,8 +143,29 @@ export default function TableThesis(props) {
 						<Table.Column title="Type of Text" key="type" dataIndex="type" />
 						<Table.Column
 							title="Publishable Paper"
-							key="type"
-							dataIndex="file_name"
+							key="pdf_file"
+							render={(_, record) => {
+								let attachment = null;
+
+								if (record.attachments && record.attachments.length > 0) {
+									attachment = record.attachments[0];
+								}
+
+								return (
+									<Button
+										type="link"
+										className="color-1"
+										onClick={() =>
+											setToggleModalPreviewPdf({
+												open: true,
+												data: attachment,
+											})
+										}
+									>
+										<FontAwesomeIcon icon={faEye} />
+									</Button>
+								);
+							}}
 						/>
 					</Table>
 				</Col>
@@ -169,16 +185,10 @@ export default function TableThesis(props) {
 				</Col>
 			</Row>
 
-			{/* <ModalFormEntranceExamSchedule
-				toggleModalFormEntranceExamSchedule={
-					toggleModalFormEntranceExamSchedule
-				}
-				setToggleModalFormEntranceExamSchedule={
-					setToggleModalFormEntranceExamSchedule
-				}
-				dataSource={dataSource}
-				refetchSource={refetchSource}
-			/> */}
+			<ModalAttachmentPreview
+				toggleModalPreviewPdf={toggleModalPreviewPdf}
+				setToggleModalPreviewPdf={setToggleModalPreviewPdf}
+			/>
 		</>
 	);
 }
