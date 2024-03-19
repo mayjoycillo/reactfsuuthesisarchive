@@ -13,6 +13,8 @@ import optionType from "../../../providers/optionType";
 import ModalAttachment from "./components/ModalAttachment";
 
 import { InboxOutlined } from "@ant-design/icons";
+import moment, { isMoment } from "moment";
+import dayjs from "dayjs";
 
 export default function PageThesisAdd() {
 	const location = useLocation();
@@ -83,7 +85,8 @@ export default function PageThesisAdd() {
 		"books"
 	);
 
-	const onFinish = async (values) => {
+	const onFinish = (values) => {
+		console.log("values", values);
 		let pathname = location.pathname.split("/");
 		let data = new FormData();
 
@@ -93,7 +96,19 @@ export default function PageThesisAdd() {
 
 		data.append("department_id", values.department_id);
 		data.append("bookname", values.bookname);
-		data.append("datepublish", values.datepublish);
+
+		if (values.datepublish) {
+			if (dayjs(values.datepublish).isValid()) {
+				data.append(
+					"datepublish",
+					dayjs(values.datepublish).format("YYYY-MM-DD")
+				);
+			} else {
+				data.append("datepublish", values.datepublish);
+			}
+		} else {
+			data.append("datepublish", "");
+		}
 		data.append("type", values.type);
 		data.append("university", values.university);
 		// data.append("attachment_id", values.attachment_id);
@@ -107,6 +122,7 @@ export default function PageThesisAdd() {
 			data.append(`author_list[${index}][lastname]`, author.lastname);
 			data.append(`author_list[${index}][suffix]`, author.suffix);
 			data.append(`author_list[${index}][role]`, author.role);
+			data.append(`author_list[${index}][email]`, author.email);
 			data.append(`author_list[${index}][contact]`, author.contact);
 			data.append(`author_list[${index}][course]`, author.course);
 			data.append(`author_list[${index}][school_id]`, author.school_id);

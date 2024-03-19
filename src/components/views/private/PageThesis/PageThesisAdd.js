@@ -25,6 +25,7 @@ import ModalAttachment from "./components/ModalAttachment";
 import { InboxOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpFromBracket } from "@fortawesome/pro-regular-svg-icons";
+import dayjs from "dayjs";
 
 const { Title } = Typography;
 
@@ -67,7 +68,14 @@ export default function PageThesisAdd() {
 		data.append("department_id", values.department_id);
 		data.append("bookname", values.bookname);
 		if (values.datepublish) {
-			data.append("datepublish", values.datepublish.format("YYYY-MM"));
+			if (dayjs(values.datepublish).isValid()) {
+				data.append(
+					"datepublish",
+					dayjs(values.datepublish).format("YYYY-MM-DD")
+				);
+			} else {
+				data.append("datepublish", values.datepublish);
+			}
 		} else {
 			data.append("datepublish", "");
 		}
@@ -86,6 +94,7 @@ export default function PageThesisAdd() {
 			data.append(`author_list[${index}][middlename]`, author.middlename);
 			data.append(`author_list[${index}][lastname]`, author.lastname);
 			data.append(`author_list[${index}][suffix]`, author.suffix);
+			data.append(`author_list[${index}][email]`, author.email);
 			data.append(`author_list[${index}][role]`, author.role);
 			data.append(`author_list[${index}][course]`, author.course);
 			data.append(
@@ -169,10 +178,6 @@ export default function PageThesisAdd() {
 						</Col>
 					</Row>
 
-					<Col xs={24} sm={24} md={24} lg={24}>
-						<ThesisFormAuthor />
-					</Col>
-
 					<Row gutter={(12, 12)}>
 						<Col xs={24} sm={24} md={24} lg={6}>
 							<Form.Item name="datepublish">
@@ -207,6 +212,12 @@ export default function PageThesisAdd() {
 					</Row>
 
 					<Row gutter={(12, 12)}>
+						<Col xs={24} sm={24} md={24} lg={24}>
+							<ThesisFormAuthor />
+						</Col>
+					</Row>
+
+					<Row gutter={(12, 12)} style={{ marginTop: "20px" }}>
 						<Col xs={24} sm={24} md={24} lg={24}>
 							<Form.Item name="pdf_file" valuePropName="filelist">
 								<Upload {...propsUpload}>

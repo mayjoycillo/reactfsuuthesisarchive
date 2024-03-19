@@ -3,6 +3,8 @@ import { Button, Empty, Modal } from "antd";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUpFromBracket } from "@fortawesome/pro-regular-svg-icons";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
 
@@ -16,9 +18,17 @@ export default function ModalAttachmentPreview(props) {
 		setNumPages(e.numPages);
 	};
 
+	const downloadPdf = () => {
+		const { pdf_file } = toggleModalPreviewPdf.data;
+		if (pdf_file) {
+			window.open(pdf_file, "_blank");
+		}
+	};
+
 	return (
 		<Modal
-			title="Grade File Preview"
+			width="633px"
+			title="Thesis File Preview"
 			wrapClassName="modal-wrap-upload-file-preview"
 			open={toggleModalPreviewPdf.open}
 			onCancel={() => {
@@ -30,7 +40,7 @@ export default function ModalAttachmentPreview(props) {
 			footer={null}
 		>
 			{toggleModalPreviewPdf.data && toggleModalPreviewPdf.data.pdf_file ? (
-				<>
+				<div id="modal_attachment">
 					<Document
 						file={toggleModalPreviewPdf.data.pdf_file}
 						onLoadSuccess={onDocumentLoadSuccess}
@@ -53,8 +63,16 @@ export default function ModalAttachmentPreview(props) {
 						>
 							NEXT
 						</Button>
+						<Button
+							icon={<FontAwesomeIcon icon={faArrowUpFromBracket} />}
+							onClick={downloadPdf}
+							className="btn-main-primary-download"
+							style={{ marginLeft: "319px" }}
+						>
+							Download PDF
+						</Button>
 					</div>
-				</>
+				</div>
 			) : (
 				<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No File Pdf" />
 			)}

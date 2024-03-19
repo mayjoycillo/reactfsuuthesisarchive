@@ -1,7 +1,7 @@
 import { Menu } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faUser } from "@fortawesome/pro-light-svg-icons";
-import { faBook } from "@fortawesome/pro-regular-svg-icons";
+import { faBook, faFolder } from "@fortawesome/pro-regular-svg-icons";
 
 export const adminHeaderMenuLeft = (
 	<>
@@ -44,7 +44,7 @@ export const adminSideMenu = [
 	{
 		title: "Archived",
 		path: "/thesis/archived",
-		icon: <FontAwesomeIcon icon={faBook} />,
+		icon: <FontAwesomeIcon icon={faFolder} />,
 	},
 
 	{

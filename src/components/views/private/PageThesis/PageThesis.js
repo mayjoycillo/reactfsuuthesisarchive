@@ -17,7 +17,14 @@ export default function PageThesis() {
 		sort_field: "created_at",
 		sort_order: "desc",
 		status: "Active",
+		year_range: [],
+		department_id: "",
 	});
+
+	const { data: dataDepartments } = GET(
+		`api/ref_departments`,
+		"ref_departments"
+	);
 
 	const { data: dataSource, refetch: refetchSource } = GET(
 		`api/books?${new URLSearchParams(tableFilter)}`,
@@ -52,6 +59,14 @@ export default function PageThesis() {
 					tableFilter={tableFilter}
 					setTableFilter={setTableFilter}
 					location={location}
+					dataDepartments={
+						dataDepartments && dataDepartments.data
+							? dataDepartments.data.map((item) => ({
+									value: item.id,
+									label: item.department_name,
+							  }))
+							: []
+					}
 				/>
 			</Col>
 		</Row>

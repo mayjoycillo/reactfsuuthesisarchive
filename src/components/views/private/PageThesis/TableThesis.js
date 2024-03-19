@@ -1,20 +1,41 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Row, Button, Col, Table, notification, Popconfirm } from "antd";
+import {
+	Row,
+	Button,
+	Col,
+	Table,
+	notification,
+	Popconfirm,
+	Select,
+	Form,
+} from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faPencil, faTrash } from "@fortawesome/pro-regular-svg-icons";
 
 import { GET } from "../../../providers/useAxiosQuery";
 import {
+	TableGlobalFilter,
 	TableGlobalSearch,
+	TableGlobalYearFilter,
 	TablePageSize,
 	TablePagination,
 	TableShowingEntries,
 } from "../../../providers/CustomTableFilter";
 import ModalAttachmentPreview from "./components/ModalAttachmentPreview";
+import FloatSelect from "../../../providers/FloatSelect";
 
 export default function TableThesis(props) {
-	const { dataSource, tableFilter, setTableFilter, location } = props;
+	const {
+		dataSource,
+		tableFilter,
+		setTableFilter,
+		location,
+		placeholder,
+		size,
+		className,
+		dataDepartments,
+	} = props;
 
 	const [toggleModalPreviewPdf, setToggleModalPreviewPdf] = useState({
 		open: false,
@@ -22,6 +43,8 @@ export default function TableThesis(props) {
 	});
 
 	const navigate = useNavigate();
+
+	const { data: department } = GET(`api/ref_departments`, "ref_departments");
 
 	const onChangeTable = (pagination, filters, sorter) => {
 		setTableFilter((prevState) => ({
@@ -38,14 +61,29 @@ export default function TableThesis(props) {
 			<Row gutter={[12, 12]}>
 				<Col xs={24} sm={24} md={24}>
 					<div className="tbl-top-filter">
-						<TablePageSize
-							tableFilter={tableFilter}
-							setTableFilter={setTableFilter}
-						/>
-						<TableGlobalSearch
-							tableFilter={tableFilter}
-							setTableFilter={setTableFilter}
-						/>
+						<div>
+							<TablePageSize
+								tableFilter={tableFilter}
+								setTableFilter={setTableFilter}
+							/>
+						</div>
+						<div className="tbl-sidetop-filter">
+							<TableGlobalYearFilter
+								tableFilter={tableFilter}
+								setTableFilter={setTableFilter}
+							/>
+							<TableGlobalFilter
+								tableFilter={tableFilter}
+								setTableFilter={setTableFilter}
+								filter_key_name="department_id"
+								options={dataDepartments}
+							/>
+
+							<TableGlobalSearch
+								tableFilter={tableFilter}
+								setTableFilter={setTableFilter}
+							/>
+						</div>
 					</div>
 				</Col>
 
@@ -79,28 +117,6 @@ export default function TableThesis(props) {
 										>
 											<FontAwesomeIcon icon={faPencil} />
 										</Button>
-										<Popconfirm
-											title="Are you sure to deactivate this data?"
-											onConfirm={() => {
-												// handleDelete(record);
-											}}
-											onCancel={() => {
-												notification.error({
-													message: "Thesis Title Deactivate",
-													description: "Thesis Title was not deactivated",
-												});
-											}}
-											okText="Yes"
-											cancelText="No"
-										>
-											<Button
-												type="link"
-												className="text-danger"
-												// loading={loadingDeleteEntranceExam}
-											>
-												<FontAwesomeIcon icon={faTrash} />
-											</Button>
-										</Popconfirm>
 									</>
 								);
 							}}
@@ -137,10 +153,11 @@ export default function TableThesis(props) {
 
 						<Table.Column
 							title="Year Published"
-							key="datepublish"
-							dataIndex="datepublish"
+							key="year_publish_formatted"
+							dataIndex="year_publish_formatted"
 						/>
 						<Table.Column title="Type of Text" key="type" dataIndex="type" />
+
 						<Table.Column
 							title="Publishable Paper"
 							key="pdf_file"

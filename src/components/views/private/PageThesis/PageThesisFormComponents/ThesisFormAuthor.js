@@ -44,12 +44,16 @@ export default function ThesisFormAuthor(props) {
 							<FloatInput label="Suffix" placeholder="Suffix"></FloatInput>
 						</Form.Item>
 					</Col>
-					<Col xs={24} sm={24} md={24} lg={6}>
-						<Form.Item {...restField} name={[name, "role"]}>
-							<FloatInput label="Role" placeholder="Role" required></FloatInput>
+					<Col xs={24} sm={24} md={24} lg={12}>
+						<Form.Item {...restField} name={[name, "email"]}>
+							<FloatInput
+								label="Email Address"
+								placeholder="Email Address"
+								required
+							></FloatInput>
 						</Form.Item>
 					</Col>
-					<Col xs={24} sm={24} md={24} lg={6}>
+					<Col xs={24} sm={24} md={24} lg={12}>
 						<Form.Item {...restField} name={[name, "course"]}>
 							<FloatInput
 								label="Course"
@@ -58,7 +62,7 @@ export default function ThesisFormAuthor(props) {
 							></FloatInput>
 						</Form.Item>
 					</Col>
-					<Col xs={24} sm={24} md={24} lg={6}>
+					<Col xs={24} sm={24} md={24} lg={8}>
 						<Form.Item
 							{...restField}
 							name={[name, "school_id"]}
@@ -77,7 +81,7 @@ export default function ThesisFormAuthor(props) {
 							></FloatInput>
 						</Form.Item>
 					</Col>
-					<Col xs={24} sm={24} md={24} lg={6}>
+					<Col xs={24} sm={24} md={24} lg={8}>
 						<Form.Item {...restField} name={[name, "contact"]}>
 							<FloatInputMask
 								label="Phone No"
@@ -86,6 +90,11 @@ export default function ThesisFormAuthor(props) {
 								maskType="999 999 9999"
 								required
 							/>
+						</Form.Item>
+					</Col>
+					<Col xs={24} sm={24} md={24} lg={8}>
+						<Form.Item {...restField} name={[name, "role"]}>
+							<FloatInput label="Role" placeholder="Role" required></FloatInput>
 						</Form.Item>
 					</Col>
 

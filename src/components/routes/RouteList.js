@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import {
 	faBook,
+	faFolder,
 	faHome,
 	faUser,
 	faUsers,
@@ -87,7 +88,7 @@ export default function RouteList() {
 						title="Thesis"
 						subtitle="ADMIN"
 						pageId="PageThesis"
-						pageHeaderIcon={faUsers}
+						pageHeaderIcon={faBook}
 						breadcrumb={[
 							{
 								name: "Dashboard",
@@ -165,10 +166,10 @@ export default function RouteList() {
 					<PrivateRoute
 						moduleCode="M-01"
 						moduleName="Thesis"
-						title="Thesis"
+						title="Archived"
 						subtitle="ADMIN"
 						pageId="PageThesis"
-						pageHeaderIcon={faBook}
+						pageHeaderIcon={faFolder}
 						breadcrumb={[
 							{
 								name: "Dashboard",
@@ -193,7 +194,7 @@ export default function RouteList() {
 					<PrivateRoute
 						moduleCode="M-01"
 						moduleName="Profiling"
-						title="Profiling"
+						title="Users"
 						subtitle="ADMIN"
 						pageId="PageProfiling"
 						pageHeaderIcon={faUsers}
