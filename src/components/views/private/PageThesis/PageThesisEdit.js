@@ -15,6 +15,8 @@ import ModalAttachment from "./components/ModalAttachment";
 import { InboxOutlined } from "@ant-design/icons";
 import moment, { isMoment } from "moment";
 import dayjs from "dayjs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUpFromBracket } from "@fortawesome/pro-regular-svg-icons";
 
 export default function PageThesisAdd() {
 	const location = useLocation();
@@ -32,6 +34,17 @@ export default function PageThesisAdd() {
 	});
 
 	const { data: department } = GET(`api/ref_departments`, "ref_departments");
+	const { data: users } = GET(`api/users`, "users");
+
+	// console.log("user", user);
+
+	let email_address = null;
+
+	if (users.data && users.data[0].length > 0) {
+		email_address = users.data[0].email;
+	}
+
+	console.log("email_address: ", email_address);
 
 	GET(`api/books/${params.id}`, ["books"], (res) => {
 		console.log("res", res);
@@ -42,8 +55,13 @@ export default function PageThesisAdd() {
 			let author_list = [];
 
 			console.log("data.authors", data.authors);
+
 			if (data.authors && data.authors.length > 0) {
 				author_list = data.authors.map((item) => {
+					const user_id = item.profile.user_id;
+
+					console.log("users:", users);
+
 					return {
 						...item,
 						firstname: item.profile.firstname,
@@ -54,6 +72,7 @@ export default function PageThesisAdd() {
 						course: item.profile.course,
 						school_id: item.profile.school_id,
 						contact: item.profile.school_id,
+						email_address: email_address,
 					};
 				});
 			} else {
@@ -85,6 +104,13 @@ export default function PageThesisAdd() {
 		"books"
 	);
 
+	const propsUpload = {
+		accept: "application/pdf",
+		beforeUpload: (file) => {
+			return false;
+		},
+	};
+
 	const onFinish = (values) => {
 		console.log("values", values);
 		let pathname = location.pathname.split("/");
@@ -111,22 +137,13 @@ export default function PageThesisAdd() {
 		}
 		data.append("type", values.type);
 		data.append("university", values.university);
+		data.append(
+			"author_list",
+			JSON.stringify(values.author_list.length > 0 ? values.author_list : [])
+		);
 		// data.append("attachment_id", values.attachment_id);
 
 		// add author information
-
-		let author_list = values.author_list;
-		author_list.forEach((author, index) => {
-			data.append(`author_list[${index}][firstname]`, author.firstname);
-			data.append(`author_list[${index}][middlename]`, author.middlename);
-			data.append(`author_list[${index}][lastname]`, author.lastname);
-			data.append(`author_list[${index}][suffix]`, author.suffix);
-			data.append(`author_list[${index}][role]`, author.role);
-			data.append(`author_list[${index}][email]`, author.email);
-			data.append(`author_list[${index}][contact]`, author.contact);
-			data.append(`author_list[${index}][course]`, author.course);
-			data.append(`author_list[${index}][school_id]`, author.school_id);
-		});
 
 		const props = {
 			name: "file",
@@ -201,10 +218,6 @@ export default function PageThesisAdd() {
 					</Col>
 				</Row>
 
-				<Col xs={24} sm={24} md={24} lg={24}>
-					<ThesisFormAuthor />
-				</Col>
-
 				<Row gutter={(12, 12)}>
 					<Col xs={24} sm={24} md={24} lg={6}>
 						<Form.Item name="datepublish">
@@ -232,24 +245,23 @@ export default function PageThesisAdd() {
 					</Col>
 				</Row>
 
-				{/* <Row gutter={(12, 12)}>
+				<Row gutter={(12, 12)}>
 					<Col xs={24} sm={24} md={24} lg={24}>
-						<Form.Item name="attachment_id">
-							<Dragger {...props}>
-								<p className="ant-upload-drag-icon">
-									<InboxOutlined />
-								</p>
-								<p className="ant-upload-text">
-									Click or drag a <b> PDF file</b> to this area to upload
-								</p>
-								<p className="ant-upload-hint">
-									Support for a single or bulk upload. Strictly prohibited from
-									uploading company data or other banned files.
-								</p>
-							</Dragger>
+						<ThesisFormAuthor />
+					</Col>
+				</Row>
+
+				<Row gutter={(12, 12)} style={{ marginTop: "20px" }}>
+					<Col xs={24} sm={24} md={24} lg={24}>
+						<Form.Item name="pdf_file" valuePropName="filelist">
+							<Upload {...propsUpload}>
+								<Button icon={<FontAwesomeIcon icon={faArrowUpFromBracket} />}>
+									Upload File PDF
+								</Button>
+							</Upload>
 						</Form.Item>
 					</Col>
-				</Row> */}
+				</Row>
 
 				<ModalAttachment
 					toggleModalAttachment={toggleModalAttachment}

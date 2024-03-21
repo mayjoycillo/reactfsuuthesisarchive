@@ -45,7 +45,7 @@ export default function ThesisFormAuthor(props) {
 						</Form.Item>
 					</Col>
 					<Col xs={24} sm={24} md={24} lg={12}>
-						<Form.Item {...restField} name={[name, "email"]}>
+						<Form.Item {...restField} name={[name, "email_address"]}>
 							<FloatInput
 								label="Email Address"
 								placeholder="Email Address"
