@@ -38,13 +38,13 @@ export default function PageThesisAdd() {
 
 	// console.log("user", user);
 
-	let email_address = null;
+	// let email_address = null;
 
-	if (users.data && users.data[0].length > 0) {
-		email_address = users.data[0].email;
-	}
+	// if (users.data && users.data.length > 0) {
+	// 	email_address = users.data.email;
+	// }
 
-	console.log("email_address: ", email_address);
+	// console.log("email_address: ", email_address);
 
 	GET(`api/books/${params.id}`, ["books"], (res) => {
 		console.log("res", res);
@@ -57,24 +57,37 @@ export default function PageThesisAdd() {
 			console.log("data.authors", data.authors);
 
 			if (data.authors && data.authors.length > 0) {
-				author_list = data.authors.map((item) => {
-					const user_id = item.profile.user_id;
+				author_list = data.authors
+					.filter((item) => item.status === "1")
+					.map((item) => {
+						let email_address = null;
 
-					console.log("users:", users);
+						const user_id = item.profile.user_id;
 
-					return {
-						...item,
-						firstname: item.profile.firstname,
-						middlename: item.profile.middlename,
-						lastname: item.profile.lastname,
-						suffix: item.profile.suffix,
-						role: item.profile.role,
-						course: item.profile.course,
-						school_id: item.profile.school_id,
-						contact: item.profile.school_id,
-						email_address: email_address,
-					};
-				});
+						if (data.users && data.users.length > 0) {
+							const user = data.users.find((user) => user.id === user_id);
+							if (user && user.email) {
+								email_address = user.email;
+							}
+						}
+
+						console.log("email_address", email_address);
+
+						console.log("data.users", data.users);
+
+						return {
+							...item,
+							firstname: item.profile.firstname,
+							middlename: item.profile.middlename,
+							lastname: item.profile.lastname,
+							suffix: item.profile.suffix,
+							role: item.profile.role,
+							course: item.profile.course,
+							school_id: item.profile.school_id,
+							contact: item.profile.school_id,
+							email_address: email_address,
+						};
+					});
 			} else {
 				author_list = [{}];
 			}

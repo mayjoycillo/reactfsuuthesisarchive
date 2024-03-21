@@ -47,10 +47,6 @@ export default function RouteList() {
 								link: "/dashboard",
 							},
 							{
-								name: "Books",
-								link: "/thesis/books",
-							},
-							{
 								name: "Edit Profile",
 							},
 						]}

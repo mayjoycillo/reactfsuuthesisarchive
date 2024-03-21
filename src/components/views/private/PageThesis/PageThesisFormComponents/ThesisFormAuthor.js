@@ -70,7 +70,7 @@ export default function ThesisFormAuthor(props) {
 								{
 									min: 3,
 									max: 11,
-									message: "hjkk",
+									message: "Invalid School ID",
 								},
 							]}
 						>
